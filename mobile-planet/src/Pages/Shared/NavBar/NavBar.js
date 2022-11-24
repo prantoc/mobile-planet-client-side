@@ -3,13 +3,14 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo/logo.png'
+import '../../../assets/css/main/main.css'
 const NavBar = () => {
     return (
         <>
             <Navbar expand="lg" className='shadow-lg p-3 dark-nav-bg'>
                 <Container fluid>
-                    <Navbar.Brand href="/" className='fw-bold logo'><img src={logo} alt='Logo' /> <span style={{ color: "#00a0ff" }}>Photography</span> <span style={{ color: "#64f0ff" }}>World</span></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Brand href="/" className='fw-bold logo'><img src={logo} alt='Logo' /> <span style={{ color: "#00a0ff" }}>Mobile Planet</span></Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbarScroll" className='' />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
                             className="me-auto my-2 my-lg-0"
@@ -32,18 +33,19 @@ const NavBar = () => {
                                 <Nav.Link>My Reviews</Nav.Link>
                             </LinkContainer>
                         </Nav>
-
-                        <Nav className='py-1'>
-                            <LinkContainer to="/login" >
-                                <Link className="nav-link">Login</Link>
-                            </LinkContainer>
-                            <LinkContainer to="/signup">
-                                <Link className="nav-link">SignUp</Link>
-                            </LinkContainer>
-                        </Nav>
                     </Navbar.Collapse>
+
                 </Container>
+                <div className='py-1 d-flex justify-content-end'>
+                    <LinkContainer to="/login" className='me-1 d-block'>
+                        <Link className="nav-link bg-primary text-white px-3 p-2 rounded-pill">Login</Link>
+                    </LinkContainer>
+                    <LinkContainer to="/signup">
+                        <Link className="nav-link text-white px-3 p-2 rounded-pill cs-primary">SignUp</Link>
+                    </LinkContainer>
+                </div>
             </Navbar>
+
         </>
     );
 };

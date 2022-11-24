@@ -1,0 +1,24 @@
+/*! Custom-primary-color */
+.cs-primary {
+    background-color: #00a0ff !important;
+}
+
+/*! home-top-banner */
+.home-top-banner {
+    background: url('../../banner/banner4.jpg');
+    height: 480px !important;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg-layer {
+    background-color: #00000082;
+    height: 480px !important;
+}
+
+/*! search-box */
+.form-control:focus {
+    border-color: #fff !important;
+    box-shadow: none !important;
+}
