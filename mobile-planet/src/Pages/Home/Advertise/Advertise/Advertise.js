@@ -6,9 +6,9 @@ const Advertise = () => {
     return (
         <>
             <Container className='py-5 mx-auto'>
-                <h1 className='text-center cs-color-primary py-5 fw-bold'>Advertise Product</h1>
+                <h1 className='text-center py-5 fw-bold'>Advertise Product</h1>
                 <Row>
-                    <Col md={6}>
+                    <Col md={6} className="animate__animated animate__backInLeft">
                         <Link className='nav-link'>
                             <div className="card mb-3 shadow p-3 bg-body rounded border-0 mx-auto" style={{ maxWidth: "540px" }}>
                                 <div className="row g-0">
@@ -33,7 +33,7 @@ const Advertise = () => {
 
                         </Link>
                     </Col>
-                    <Col md={6}>
+                    <Col md={6} className="animate__animated animate__backInLeft">
                         <Link className='nav-link'>
                             <div className="card mb-3 shadow p-3 bg-body rounded border-0 mx-auto" style={{ maxWidth: "540px" }}>
                                 <div className="row g-0">
