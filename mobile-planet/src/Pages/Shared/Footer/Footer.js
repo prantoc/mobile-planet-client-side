@@ -60,7 +60,7 @@ const Footer = () => {
                             </div>
                         </div>
 
-                        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                        <div class="d-flex flex-column flex-sm-row justify-content-between py-2 my-2 border-top">
                             <p> © 2022 <a href="https://github.com/prantoc" className='cs-color-primary'>Pranto</a> - All rights reserved.</p>
                             <ul class="list-unstyled d-flex">
                                 <li class="ms-3"><Link class="cs-color-primary fw-bold fs-5" href="#"> <FaFacebookF /> </Link></li>
