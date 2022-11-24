@@ -21,16 +21,10 @@ const NavBar = () => {
                                 <Nav.Link>Home</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to="services">
-                                <Nav.Link>Services</Nav.Link>
+                                <Nav.Link>All Products</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to="blog">
                                 <Nav.Link>Blog</Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="add-service">
-                                <Nav.Link>Add Service</Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="my-reviews">
-                                <Nav.Link>My Reviews</Nav.Link>
                             </LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
