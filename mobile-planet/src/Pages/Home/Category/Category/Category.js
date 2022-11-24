@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 const Category = () => {
     return (
         <>
-            <Container className='py-5'>
-                <h1 className='text-center py-5 fw-bold'>Shop & Sell By Category</h1>
+            <Container className='py-5 my-5'>
+                <h1 className='text-center py-5 fw-bold'>SHOP & SELL BY CATEGORY</h1>
                 <Row>
                     <Col md={3} className="mb-2 text-center animate__animated animate__backInUp">
                         <Link className='nav-link'>

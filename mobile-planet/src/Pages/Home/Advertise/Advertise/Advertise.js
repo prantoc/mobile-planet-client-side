@@ -5,8 +5,8 @@ import CardImg from '../../../../assets/banner/banner4.jpg'
 const Advertise = () => {
     return (
         <>
-            <Container className='py-5'>
-                <h1 className='text-center py-5 fw-bold'>Advertise Product</h1>
+            <Container className='py-5 my-5'>
+                <h1 className='text-center py-5 fw-bold'>ADVERTISE PRODUCT</h1>
                 <Row>
                     <Col md={6} className="animate__animated animate__backInLeft">
                         <Link className='nav-link'>

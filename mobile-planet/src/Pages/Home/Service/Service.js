@@ -6,7 +6,7 @@ import searchIcon from '../../../assets/service/verification.png'
 const Service = () => {
     return (
         <>
-            <Container className='py-5'>
+            <Container className='py-5 my-5'>
                 <h1 className='text-center py-5 fw-bold'>WE'VE GOT YOUR BACK</h1>
                 <Row>
                     <Col md={4}>
