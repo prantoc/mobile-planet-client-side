@@ -5,12 +5,12 @@ import CardImg from '../../../../assets/banner/banner4.jpg'
 const Advertise = () => {
     return (
         <>
-            <Container className='py-5 mx-auto'>
+            <Container className='py-5'>
                 <h1 className='text-center py-5 fw-bold'>Advertise Product</h1>
                 <Row>
                     <Col md={6} className="animate__animated animate__backInLeft">
                         <Link className='nav-link'>
-                            <div className="card mb-3 shadow p-3 bg-body rounded border-0 mx-auto" style={{ maxWidth: "540px" }}>
+                            <div className="card mb-3 shadow-lg p-3 bg-body rounded border-0 mx-auto" style={{ maxWidth: "540px" }}>
                                 <div className="row g-0">
                                     <div className="col-md-4">
                                         <img className="img-fluid rounded-start h-100" src={CardImg} alt="" />
@@ -35,7 +35,7 @@ const Advertise = () => {
                     </Col>
                     <Col md={6} className="animate__animated animate__backInLeft">
                         <Link className='nav-link'>
-                            <div className="card mb-3 shadow p-3 bg-body rounded border-0 mx-auto" style={{ maxWidth: "540px" }}>
+                            <div className="card mb-3 shadow-lg p-3 bg-body rounded border-0 mx-auto" style={{ maxWidth: "540px" }}>
                                 <div className="row g-0">
                                     <div className="col-md-4">
                                         <img className="img-fluid rounded-start h-100" src={CardImg} alt="" />
