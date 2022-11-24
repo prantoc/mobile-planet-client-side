@@ -1,6 +1,10 @@
 /*! Custom-primary-color */
-.cs-primary {
+.cs-bg-primary {
     background-color: #00a0ff !important;
+}
+
+.cs-color-primary {
+    color: #00a0ff !important;
 }
 
 /*! home-top-banner */
@@ -13,7 +17,7 @@
 }
 
 .bg-layer {
-    background-color: #00000082;
+    background-color: #000000c4;
     height: 480px !important;
 }
 

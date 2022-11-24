@@ -35,7 +35,7 @@ const NavBar = () => {
                         <Link className="nav-link bg-primary text-white px-3 p-2 rounded-pill">Login</Link>
                     </LinkContainer>
                     <LinkContainer to="/signup">
-                        <Link className="nav-link text-white px-3 p-2 rounded-pill cs-primary">SignUp</Link>
+                        <Link className="nav-link text-white px-3 p-2 rounded-pill cs-bg-primary">SignUp</Link>
                     </LinkContainer>
                 </div>
             </Navbar>
