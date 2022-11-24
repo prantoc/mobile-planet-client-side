@@ -11,17 +11,23 @@ const Service = () => {
                 <Row>
                     <Col md={4}>
                         <Card className='border-0 text-center'>
-                            <Card.Body className='fw-bold'> <img src={paymentIcon} alt="" /> Secured Payment</Card.Body>
+                            <div className='mx-auto bg-light p-3 rounded-circle'><img src={paymentIcon} alt="" height={60} /></div>
+                            <Card.Body className='fw-bold'> Secured Payment</Card.Body>
+                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, nemo saepe fugit modi ullam cumque doloribus. Quaerat maiores tempore, explicabo vero expedita ullam ea corrupti ipsam ipsa architecto minus amet?</span>
                         </Card>
                     </Col>
                     <Col md={4}>
                         <Card className='border-0 text-center'>
-                            <Card.Body className='fw-bold'> <img src={serviceIcon} alt="" /> Qualityfull Products</Card.Body>
+                            <div className='mx-auto bg-light p-3 rounded-circle'> <img src={serviceIcon} alt="" height={60} /></div>
+                            <Card.Body className='fw-bold'>Qualityfull Products</Card.Body>
+                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, nemo saepe fugit modi ullam cumque doloribus. Quaerat maiores tempore, explicabo vero expedita ullam ea corrupti ipsam ipsa architecto minus amet?</span>
                         </Card>
                     </Col>
                     <Col md={4}>
                         <Card className='border-0 text-center'>
-                            <Card.Body className='fw-bold'> <img src={searchIcon} alt="" /> Quickly Get Product</Card.Body>
+                            <div className='mx-auto bg-light p-3 rounded-circle'><img src={searchIcon} alt="" height={60} /></div>
+                            <Card.Body className='fw-bold'>Quickly Get Product</Card.Body>
+                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, nemo saepe fugit modi ullam cumque doloribus. Quaerat maiores tempore, explicabo vero expedita ullam ea corrupti ipsam ipsa architecto minus amet?</span>
                         </Card>
                     </Col>
                 </Row>
