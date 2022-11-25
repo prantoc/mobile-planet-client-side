@@ -8,9 +8,11 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import { errorToast, successToast } from '../../../toast/Toaster';
 import avatar from '../../../assets/avater/man.png'
 import { useAdmin } from '../../../hooks/useAdmin';
+import { useSeller } from '../../../hooks/useSeller';
 const NavBar = () => {
     const { user, logoutUser } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
+    const [isSeller] = useSeller(user?.email)
     const userLogout = () => {
         logoutUser()
             .then(() => {
@@ -46,6 +48,9 @@ const NavBar = () => {
                             </LinkContainer>
                             {isAdmin && <LinkContainer to="/dashboard">
                                 <Nav.Link className='cs-color-primary fw-bold'>Admin-Dashboard</Nav.Link>
+                            </LinkContainer>}
+                            {isSeller && <LinkContainer to="/dashboard/seller/product">
+                                <Nav.Link className='cs-color-primary fw-bold'>Seller-Dashboard</Nav.Link>
                             </LinkContainer>}
                         </Nav>
                     </Navbar.Collapse>

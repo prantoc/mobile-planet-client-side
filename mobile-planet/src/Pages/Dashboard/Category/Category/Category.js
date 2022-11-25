@@ -96,8 +96,6 @@ const Category = () => {
     return (
         <>
             <h3>Category</h3>
-
-
             <div className='shadow-lg p-3 my-3 bg-body rounded'>
                 <div className="d-flex justify-content-end align-items-center mb-5">
                     <Button variant="primary" onClick={handleShow}>
@@ -107,7 +105,6 @@ const Category = () => {
                 <Table striped>
                     <thead>
                         <tr>
-
                             <th>#</th>
                             <th>Category Name</th>
                             <th>Category Image</th>
@@ -134,7 +131,6 @@ const Category = () => {
                     </tbody>
                 </Table>
             </div>
-
 
             <Modal show={show} onHide={handleClose}>
                 <div className='shadow-lg bg-body'>
@@ -178,7 +174,6 @@ const Category = () => {
                                 </div>
                             </button>
                         </form>
-
                     </Modal.Body>
                 </div>
             </Modal>
