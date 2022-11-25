@@ -95,7 +95,7 @@ const Category = () => {
 
     return (
         <>
-            <h3>Category</h3>
+            <h3>Categories</h3>
             <div className='shadow-lg p-3 my-3 bg-body rounded'>
                 <div className="d-flex justify-content-end align-items-center mb-5">
                     <Button variant="primary" onClick={handleShow}>
