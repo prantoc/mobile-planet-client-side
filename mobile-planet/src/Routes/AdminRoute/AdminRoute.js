@@ -3,10 +3,11 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { useAdmin } from '../../hooks/useAdmin';
 import Loading from '../../Pages/Shared/Loading/Loading';
+import { errorToast, successToast } from '../../toast/Toaster';
 
 
 const AdminRoute = ({ children }) => {
-    const { user, loading } = useContext(AuthContext);
+    const { user, loading, logoutUser } = useContext(AuthContext);
     const [isAdmin, isAdminLoading] = useAdmin(user?.email)
     const location = useLocation();
     if (loading || isAdminLoading) {
@@ -15,7 +16,15 @@ const AdminRoute = ({ children }) => {
     if (user && isAdmin) {
         return children;
     }
-    return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
+    logoutUser()
+        .then(() => {
+            successToast(' Sign-out successful');
+            return <Navigate to="/login" state={{ from: location }} replace></Navigate>
+        }).catch((e) => {
+            errorToast(e);
+        });
+
+
 };
 
 export default AdminRoute;

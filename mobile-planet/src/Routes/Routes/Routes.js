@@ -7,6 +7,7 @@ import Category from "../../Pages/Dashboard/Category/Category/Category";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Home from "../../Pages/Home/Home/Home";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -29,7 +30,11 @@ export const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <DashboardLayout />,
+        element: <PrivateRoute>
+            <AdminRoute>
+                <DashboardLayout />
+            </AdminRoute>
+        </PrivateRoute>,
         children: [
             {
                 path: "/dashboard",
@@ -38,7 +43,7 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/category",
                 element: <AdminRoute><Category></Category></AdminRoute>
-            }
+            },
         ]
     },
 ]);

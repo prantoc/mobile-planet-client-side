@@ -49,33 +49,33 @@ const NavBar = () => {
                             </LinkContainer>}
                         </Nav>
                     </Navbar.Collapse>
+                    <div className='py-1 d-flex justify-content-end'>
+                        {
+                            user
+                                ?
+                                <Dropdown>
+                                    <Dropdown.Toggle className='border-0 pt-0 mt-0' variant="outline-light" id="dropdown-basic">
+                                        <Image roundedCircle style={{ height: '38px' }} src={user.photoURL ? user.photoURL : avatar} />
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu className='position-absolute end-100 translate-middle-x' style={{ zIndex: '9999' }}>
+                                        <Dropdown.Item >{user?.displayName}</Dropdown.Item>
+                                        <Dropdown.Item onClick={userLogout}>Logout</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
 
+                                :
+                                <>
+                                    <LinkContainer to="/login" className='me-1 d-block'>
+                                        <Link className="nav-link bg-primary text-white px-3 p-2 rounded-pill">Login</Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="/signup" className="d-none d-lg-block">
+                                        <Link className="nav-link text-white px-3 p-2 rounded-pill cs-bg-primary">SignUp</Link>
+                                    </LinkContainer>
+                                </>
+                        }
+                    </div>
                 </Container>
-                <div className='py-1 d-flex justify-content-end'>
-                    {
-                        user
-                            ?
-                            <Dropdown>
-                                <Dropdown.Toggle className='border-0 pt-0 mt-0' variant="outline-light" id="dropdown-basic">
-                                    <Image roundedCircle style={{ height: '38px' }} src={user.photoURL ? user.photoURL : avatar} />
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className='position-absolute end-100 translate-middle-x' style={{ zIndex: '9999' }}>
-                                    <Dropdown.Item >{user?.displayName}</Dropdown.Item>
-                                    <Dropdown.Item onClick={userLogout}>Logout</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
 
-                            :
-                            <>
-                                <LinkContainer to="/login" className='me-1 d-block'>
-                                    <Link className="nav-link bg-primary text-white px-3 p-2 rounded-pill">Login</Link>
-                                </LinkContainer>
-                                <LinkContainer to="/signup">
-                                    <Link className="nav-link text-white px-3 p-2 rounded-pill cs-bg-primary">SignUp</Link>
-                                </LinkContainer>
-                            </>
-                    }
-                </div>
             </Navbar>
 
         </>
