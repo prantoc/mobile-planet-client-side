@@ -10,7 +10,7 @@ import Loading from '../../../Shared/Loading/Loading';
 const Category = () => {
 
     const [load, setLoad] = useState(false);
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const imgHostKey = process.env.REACT_APP_IMGBB_KEY;
     const { data: categories, isLoading, refetch } = useQuery({
         queryKey: ['category'],
@@ -45,7 +45,7 @@ const Category = () => {
                     const config = {
                         headers: {
                             'content-type': 'application/json',
-                            authoraization: `bearer ${localStorage.getItem('mobile-planet')}`
+                            authorization: `bearer ${localStorage.getItem('mobile-planet')}`
                         }
                     }
 
@@ -55,6 +55,7 @@ const Category = () => {
                                 successToast('Category Successfully Added !')
                                 setLoad(false)
                                 refetch()
+                                reset()
                             }
                         })
                 }
