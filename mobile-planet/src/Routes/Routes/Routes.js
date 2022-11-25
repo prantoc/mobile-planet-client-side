@@ -6,6 +6,7 @@ import SignUp from "../../Pages/Auth/SignUp/SignUp";
 import Category from "../../Pages/Dashboard/Category/Category/Category";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Home from "../../Pages/Home/Home/Home";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/category",
-                element: <Category></Category>
+                element: <AdminRoute><Category></Category></AdminRoute>
             }
         ]
     },
