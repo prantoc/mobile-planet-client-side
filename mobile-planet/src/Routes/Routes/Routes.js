@@ -5,9 +5,11 @@ import Login from "../../Pages/Auth/Login/Login";
 import SignUp from "../../Pages/Auth/SignUp/SignUp";
 import Category from "../../Pages/Dashboard/Category/Category/Category";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import Product from "../../Pages/Dashboard/Product/Product/Product";
 import Home from "../../Pages/Home/Home/Home";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 export const router = createBrowserRouter([
     {
@@ -30,19 +32,23 @@ export const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <PrivateRoute>
-            <AdminRoute>
-                <DashboardLayout />
-            </AdminRoute>
-        </PrivateRoute>,
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
         children: [
             {
                 path: "/dashboard",
-                element: <Dashboard></Dashboard>
+                element: <AdminRoute> <Dashboard></Dashboard></AdminRoute>
             },
             {
                 path: "/dashboard/category",
                 element: <AdminRoute><Category></Category></AdminRoute>
+            },
+            {
+                path: "/dashboard/product",
+                element: <AdminRoute><Product></Product></AdminRoute>
+            },
+            {
+                path: "/dashboard/seller/product",
+                element: <SellerRoute><Product></Product></SellerRoute>
             },
         ]
     },
