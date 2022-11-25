@@ -146,19 +146,22 @@ const Category = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {categories.length > 0 && categories?.map((cat, i) =>
-                            <tr key={i}>
-                                <td>{i + 1}</td>
+                        {isLoading ?
+                            <Loading></Loading>
+                            :
+                            categories.length > 0 && categories?.map((cat, i) =>
+                                <tr key={i}>
+                                    <td>{i + 1}</td>
 
-                                <td>{cat.categoryName}</td>
-                                <td>
-                                    <Image roundedCircle style={{ height: '48px' }} src={cat.categoryImage} />
-                                </td>
-                                <td>
-                                    <Button variant='danger' onClick={() => handleDeleteCategory(cat._id)}>Delete</Button>
-                                </td>
-                            </tr>
-                        )}
+                                    <td>{cat.categoryName}</td>
+                                    <td>
+                                        <Image roundedCircle style={{ height: '48px' }} src={cat.categoryImage} />
+                                    </td>
+                                    <td>
+                                        <Button variant='danger' onClick={() => handleDeleteCategory(cat._id)}>Delete</Button>
+                                    </td>
+                                </tr>
+                            )}
                     </tbody>
                 </Table>
             </div>
