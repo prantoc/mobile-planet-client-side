@@ -10,7 +10,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import { errorToast, successToast } from '../../../toast/Toaster';
 import { useToken } from '../../../hooks/useToken';
 const SignUp = () => {
-    const { signInWithEmailPass, loading, setLoading, updateUserData } = useContext(AuthContext)
+    const { signInWithEmailPass, loading, setLoading, updateUserData, signInByGoogle } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [createdEmail, setCreatedEmail] = useState('')
     const token = useToken(createdEmail);
@@ -18,6 +18,7 @@ const SignUp = () => {
     if (token) {
         navigate('/')
     }
+    //? Signup function
     const handleSignUp = data => {
         setLoading(true)
         const { name, email, password, type } = data
@@ -41,7 +42,24 @@ const SignUp = () => {
                 setLoading(false)
             });
     }
+    //? Google sign in 
+    const googleSignIn = () => {
+        signInByGoogle()
+            .then((result) => {
+                const userData = result.user;
+                const user = {
+                    name: userData.displayName,
+                    email: userData.email,
+                    role: 'buyer'
+                }
+                saveUser(user)
+                successToast(`Hi,${userData.displayName}  You Logged in successfully`);
+            }).catch((e) => {
+                errorToast(e);
+            });
+    }
 
+    //? Save user some details into mongodb
     const saveUser = (user) => {
         fetch(`http://localhost:5000/users`, {
             method: 'POST',
@@ -62,7 +80,6 @@ const SignUp = () => {
                 }
             })
     }
-
 
     return (
         <Container>
@@ -141,7 +158,7 @@ const SignUp = () => {
                     <div className="form-text text-center p-2 mt-3">Have an account? <Link to="/login">Login</Link></div>
                     <hr />
                     <div className='d-flex justify-content-center'>
-                        <img className='m-4' role="button" src={google} alt='Logo' width={30} />
+                        <img className='m-4' role="button" src={google} onClick={googleSignIn} alt='Logo' width={30} />
                         <img className='m-4' role="button" src={github} alt='Logo' width={30} />
                         <img className='m-4' role="button" src={facebook} alt='Logo' width={30} />
                     </div>

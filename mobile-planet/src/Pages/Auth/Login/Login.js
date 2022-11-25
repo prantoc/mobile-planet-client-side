@@ -10,13 +10,17 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import { errorToast, successToast } from '../../../toast/Toaster';
 import { useToken } from '../../../hooks/useToken';
 const Login = () => {
-    const { userSignIn, loading, setLoading, } = useContext(AuthContext);
+    const { userSignIn, loading, setLoading, signInByGoogle } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [loggedInUserEmail, setLoggedInUserEmail] = useState('')
     const token = useToken(loggedInUserEmail)
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+
+    if (token) {
+        navigate('/')
+    }
 
     if (token) {
         navigate(from, { replace: true });
@@ -36,6 +40,44 @@ const Login = () => {
                 errorToast(errorMessage);
                 setLoading(false)
                 console.log(errorMessage);
+            })
+    }
+
+    const googleSignIn = () => {
+        signInByGoogle()
+            .then((result) => {
+                const userData = result.user;
+                const user = {
+                    name: userData.displayName,
+                    email: userData.email,
+                    role: 'buyer'
+                }
+                saveUser(user)
+                successToast(`Hi,${user.displayName}  You Logged in successfully`);
+            }).catch((e) => {
+                errorToast(e);
+            });
+    }
+
+    //? Save user some details into mongodb
+    const saveUser = (user) => {
+        fetch(`http://localhost:5000/users`, {
+            method: 'POST',
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    successToast('successfully created an account')
+                    setLoading(false)
+                    setLoggedInUserEmail(user.email)
+                }
+                else {
+                    errorToast('Something went wrong')
+                }
             })
     }
 
@@ -80,7 +122,7 @@ const Login = () => {
                     <div className="form-text text-center p-2 mt-3">Doesn't have an account? <Link to="/signup">Create new Acoount</Link></div>
                     <hr />
                     <div className='d-flex justify-content-center mt-3'>
-                        <img className='m-4' role="button" src={google} alt='Logo' width={30} />
+                        <img className='m-4' role="button" src={google} onClick={googleSignIn} alt='Logo' width={30} />
                         <img className='m-4' role="button" src={github} alt='Logo' width={30} />
                         <img className='m-4' role="button" src={facebook} alt='Logo' width={30} />
                     </div>
