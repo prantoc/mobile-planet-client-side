@@ -23,6 +23,6 @@
 
 /*! search-box */
 .form-control:focus {
-    border-color: #fff !important;
+    /* border-color: #fff !important; */
     box-shadow: none !important;
 }

@@ -1,20 +1,23 @@
 import React from 'react';
-import { FaHome } from 'react-icons/fa';
+import { FaHome, FaNotesMedical } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const DashboardSidebar = () => {
 
     return (
         <>
-
             <nav id="sidebarMenu" className="col-md-3 col-4 col-lg-2 d-md-block bg-light sidebar shadow-lg">
 
                 <div className="position-sticky pt-5 sidebar-sticky">
                     <ul className="nav flex-column">
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href="#">
-                                <FaHome></FaHome>
-                                Dashboard
+                            <Link to="/dashboard" className="nav-link" aria-current="page">
+                                <FaHome></FaHome> Dashboard
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/dashboard/category" className="nav-link" aria-current="page">
+                                <FaNotesMedical></FaNotesMedical> Category
                             </Link>
                         </li>
                         <li className="nav-item">
