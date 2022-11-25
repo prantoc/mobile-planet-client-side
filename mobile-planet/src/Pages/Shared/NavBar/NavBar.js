@@ -7,8 +7,10 @@ import '../../../assets/css/main/main.css'
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { errorToast, successToast } from '../../../toast/Toaster';
 import avatar from '../../../assets/avater/man.png'
+import { useAdmin } from '../../../hooks/useAdmin';
 const NavBar = () => {
     const { user, logoutUser } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email)
     const userLogout = () => {
         logoutUser()
             .then(() => {
@@ -42,6 +44,9 @@ const NavBar = () => {
                             <LinkContainer to="blog">
                                 <Nav.Link>Blog</Nav.Link>
                             </LinkContainer>
+                            {isAdmin && <LinkContainer to="/dashboard">
+                                <Nav.Link className='cs-color-primary fw-bold'>Admin-Dashboard</Nav.Link>
+                            </LinkContainer>}
                         </Nav>
                     </Navbar.Collapse>
 
