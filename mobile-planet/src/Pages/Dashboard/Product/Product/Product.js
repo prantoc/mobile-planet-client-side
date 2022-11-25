@@ -34,10 +34,10 @@ const Product = () => {
                         }
                     }
 
-                    axios.delete(`http://localhost:5000/category/${id}`, config)
+                    axios.delete(`http://localhost:5000/product/${id}`, config)
                         .then(res => {
                             if (res.data.acknowledged) {
-                                swlFire('Category has been deleted successfully!')
+                                swlFire('Product has been deleted successfully!')
                                 refetch()
                             }
                         })
