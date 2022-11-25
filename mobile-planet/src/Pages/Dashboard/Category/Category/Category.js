@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button, Image, Table } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { FaArrowRight } from 'react-icons/fa';
-import { successToast } from '../../../../toast/Toaster';
+import { deleteItemAlret, successToast, swlFire } from '../../../../toast/Toaster';
 import Loading from '../../../Shared/Loading/Loading';
 
 const Category = () => {
@@ -58,6 +58,28 @@ const Category = () => {
                                 reset()
                             }
                         })
+                }
+            })
+    }
+    const handleDeleteCategory = (id) => {
+        deleteItemAlret()
+            .then((result) => {
+                if (result.isConfirmed) {
+                    const config = {
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `bearer ${localStorage.getItem('mobile-planet')}`
+                        }
+                    }
+
+                    axios.delete(`http://localhost:5000/category/${id}`, config)
+                        .then(res => {
+                            if (res.data.acknowledged) {
+                                swlFire('Category has been deleted successfully!')
+                                refetch()
+                            }
+                        })
+
                 }
             })
 
@@ -133,7 +155,7 @@ const Category = () => {
                                     <Image roundedCircle style={{ height: '48px' }} src={cat.categoryImage} />
                                 </td>
                                 <td>
-                                    <Button variant='danger'>Delete</Button>
+                                    <Button variant='danger' onClick={() => handleDeleteCategory(cat._id)}>Delete</Button>
                                 </td>
                             </tr>
                         )}

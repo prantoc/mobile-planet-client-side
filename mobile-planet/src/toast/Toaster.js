@@ -30,8 +30,8 @@ const errorToast = (message) => {
 
 //# Sweet Alert Delete Confirmation Swal
 const MySwal = withReactContent(Swal)
-const deleteItem = () => {
-    MySwal.fire({
+const deleteItemAlret = () => {
+    return MySwal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
@@ -42,4 +42,12 @@ const deleteItem = () => {
     })
 }
 
-export { successToast, errorToast, deleteItem }
+const swlFire = (mgs) => {
+    Swal.fire(
+        'Deleted!',
+        `${mgs}`,
+        'success'
+    )
+}
+
+export { successToast, errorToast, deleteItemAlret, swlFire }
