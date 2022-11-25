@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
@@ -9,6 +10,16 @@ const ProductModal = ({ handleClose, setShow, show, refetch }) => {
     const [load, setLoad] = useState(false);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const imgHostKey = process.env.REACT_APP_IMGBB_KEY;
+    const { data: cateNames } = useQuery({
+        queryKey: ['category'],
+        queryFn: () => fetch(`http://localhost:5000/category-name`, {
+            headers: {
+                authoraization: `bearer ${localStorage.getItem('mobile-planet')}`
+            }
+        }).then(res => res.json())
+
+    })
+
     const handleAddProduct = data => {
         setLoad(true)
         const img = data.img[0];
@@ -22,11 +33,11 @@ const ProductModal = ({ handleClose, setShow, show, refetch }) => {
             .then(res => res.json())
             .then(imgData => {
                 if (imgData.success) {
-                    const { name, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerNumber } = data
+                    const { name, productCat, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerNumber } = data
                     const productImage = imgData.data.url
                     const today = new Date();
                     const product = {
-                        productName: name, productImage, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerNumber, createdAt: today
+                        productName: name, productCategory: productCat, productImage, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerNumber, createdAt: today
                     }
 
                     const config = {
@@ -66,6 +77,17 @@ const ProductModal = ({ handleClose, setShow, show, refetch }) => {
                                         required: { value: true, message: "Product name is required" },
                                     })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.name ? "true" : "false"} />
                                     {errors.name && <p className='text-danger fw-bold my-1' role="alert">{errors.name?.message}</p>}
+                                </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="mb-4">
+                                    <label htmlFor="exampleInputName" className="form-label">Product Category</label>
+                                    <select {...register("productCat", {
+                                        required: { value: true, message: "Product Category is required" },
+                                    })} aria-invalid={errors.productCat ? "true" : "false"} className="form-select" >
+                                        {cateNames?.map((cat, i) => <option key={i} value={cat.categoryName}>{cat.categoryName}</option>)}
+                                    </select>
+                                    {errors.productCat && <p className='text-danger fw-bold my-1' role="alert">{errors.productCat?.message}</p>}
                                 </div>
                             </div>
                             <div className="col-md-4">
@@ -132,15 +154,6 @@ const ProductModal = ({ handleClose, setShow, show, refetch }) => {
                                     {errors.condition && <p className='text-danger fw-bold my-1' role="alert">{errors.condition?.message}</p>}
                                 </div>
                             </div>
-                            <div className="col-md-8">
-                                <div className="mb-4">
-                                    <label htmlFor="exampleInputName" className="form-label">Product Description</label>
-                                    <textarea {...register("description", {
-                                        required: { value: true, message: "Product Description is required" },
-                                    })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.description ? "true" : "false"}></textarea>
-                                    {errors.description && <p className='text-danger fw-bold my-1' role="alert">{errors.description?.message}</p>}
-                                </div>
-                            </div>
                             <div className="col-md-4">
                                 <div className="mb-4">
                                     <label htmlFor="exampleInputName" className="form-label">Year of Purchase</label>
@@ -150,7 +163,18 @@ const ProductModal = ({ handleClose, setShow, show, refetch }) => {
                                     {errors.purchaseYear && <p className='text-danger fw-bold my-1' role="alert">{errors.purchaseYear?.message}</p>}
                                 </div>
                             </div>
-                            <div className="col-md-4">
+
+                            <div className="col-md-12">
+                                <div className="mb-4">
+                                    <label htmlFor="exampleInputName" className="form-label">Product Description</label>
+                                    <textarea {...register("description", {
+                                        required: { value: true, message: "Product Description is required" },
+                                    })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.description ? "true" : "false"}></textarea>
+                                    {errors.description && <p className='text-danger fw-bold my-1' role="alert">{errors.description?.message}</p>}
+                                </div>
+                            </div>
+
+                            <div className="col-md-6">
                                 <div className="mb-4">
                                     <label htmlFor="exampleInputName" className="form-label">Seller name</label>
                                     <input {...register("sellerName", {
@@ -159,7 +183,7 @@ const ProductModal = ({ handleClose, setShow, show, refetch }) => {
                                     {errors.sellerName && <p className='text-danger fw-bold my-1' role="alert">{errors.sellerName?.message}</p>}
                                 </div>
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-6">
                                 <div className="mb-4">
                                     <label htmlFor="exampleInputName" className="form-label">Seller Mobile Number</label>
                                     <input {...register("sellerNumber", {
