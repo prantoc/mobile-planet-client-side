@@ -3,7 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 import React, { useContext, useState } from 'react';
 import { Button, Image, Table } from 'react-bootstrap';
-import { FaPlus, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { FaPlus, FaQuestion, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 import { useAdmin } from '../../../../hooks/useAdmin';
 import { approveItemAlret, approveSwlFire, deleteItemAlret, swlFire } from '../../../../toast/Toaster';
@@ -89,7 +89,7 @@ const Product = () => {
                     </Button>
                 </div>
                 <Table striped>
-                    <thead>
+                    <thead className='text-center'>
                         <tr>
                             <th>#</th>
                             <th>Category</th>
@@ -101,17 +101,17 @@ const Product = () => {
                             <th>Seller Name</th>
                             <th>Seller Number</th>
                             <th>Created At</th>
-                            <th>Display Listing</th>
+                            <th>Display Listing<FaQuestion title='Click the button to display and hide for listing'></FaQuestion></th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='text-center'>
                         {isLoading ?
                             <Loading></Loading>
                             :
                             products.length > 0 ?
                                 products?.map((product, i) =>
-                                    <tr key={i} className="align-content-center text-center">
+                                    <tr key={i}>
                                         <td>{i + 1}</td>
 
                                         <td>{product.productCategory}</td>

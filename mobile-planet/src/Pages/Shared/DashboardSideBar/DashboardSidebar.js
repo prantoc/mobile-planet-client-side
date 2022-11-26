@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FaHome, FaNotesMedical, FaShoppingCart } from 'react-icons/fa';
+import { FaHome, FaNotesMedical, FaShoppingCart, FaUserFriends } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { useAdmin } from '../../../hooks/useAdmin';
@@ -30,6 +30,13 @@ const DashboardSidebar = () => {
                                 <FaShoppingCart></FaShoppingCart> Products
                             </Link>}
                         </li>
+                        <li className="nav-item">
+                            {isAdmin && <Link to="/dashboard/users" className="nav-link">
+                                <FaUserFriends></FaUserFriends> Users
+                            </Link>}
+                        </li>
+
+                        {/* seller routes  */}
                         <li className="nav-item">
                             {isSeller && <Link to="/dashboard/seller/product" className="nav-link">
                                 <FaShoppingCart></FaShoppingCart> Products

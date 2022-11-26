@@ -103,7 +103,7 @@ const Category = () => {
                     </Button>
                 </div>
                 <Table striped>
-                    <thead>
+                    <thead className='text-center'>
                         <tr>
                             <th>#</th>
                             <th>Category Name</th>
@@ -111,7 +111,7 @@ const Category = () => {
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='text-center'>
                         {isLoading ?
                             <Loading></Loading>
                             :
