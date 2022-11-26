@@ -7,6 +7,7 @@ import Category from "../../Pages/Dashboard/Category/Category/Category";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Product from "../../Pages/Dashboard/Product/Product/Product";
 import Home from "../../Pages/Home/Home/Home";
+import Products from "../../Pages/Product/Products/Products";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
@@ -21,13 +22,18 @@ export const router = createBrowserRouter([
                 element: <Home></Home>
             },
             {
+                path: "/category/:id",
+                element: <Products></Products>,
+                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+            },
+            {
                 path: "/login",
                 element: <Login></Login>
             },
             {
                 path: "/signup",
                 element: <SignUp></SignUp>
-            }
+            },
         ]
     },
     {
