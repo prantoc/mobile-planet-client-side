@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import { Button, Image, Table } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
-import { deleteItemAlret, swlFire } from '../../../../toast/Toaster';
+import { approveItemAlret, approveSwlFire, deleteItemAlret, swlFire } from '../../../../toast/Toaster';
 import Loading from '../../../Shared/Loading/Loading';
 import ProductModal from '../ProductModal/ProductModal';
 
@@ -48,6 +48,30 @@ const Product = () => {
     }
 
 
+    const handleDisplayProduct = (id) => {
+        approveItemAlret()
+            .then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`http://localhost:5000/pro/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            authorization: `bearer ${localStorage.getItem('mobile-planet')}`
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res.acknowledged) {
+                                approveSwlFire('Product approved for listing!')
+                                refetch()
+                            }
+                        })
+
+                }
+            })
+
+    }
+
+
     if (isLoading) {
         return <Loading></Loading>
     }
@@ -64,7 +88,7 @@ const Product = () => {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Product</th>
+                            <th>Category</th>
                             <th>Name</th>
                             <th>Image</th>
                             <th>Location</th>
@@ -73,6 +97,7 @@ const Product = () => {
                             <th>Seller Name</th>
                             <th>Seller Number</th>
                             <th>Created At</th>
+                            <th>Display Listing</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -95,6 +120,7 @@ const Product = () => {
                                     <td>{product.sellerName}</td>
                                     <td>{product.sellerNumber}</td>
                                     <td>{moment(product.createdAt, "YYYYMMDD").format('MMMM Do YYYY')}</td>
+                                    <td>  <Button variant='success' disabled={product.displayListing} onClick={() => handleDisplayProduct(product._id)}>{product.displayListing ? 'Approved' : 'Approve'}</Button></td>
                                     <td>
                                         <Button variant='danger' onClick={() => handleDeleteProduct(product._id)}>Delete</Button>
                                     </td>

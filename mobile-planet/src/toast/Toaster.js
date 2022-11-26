@@ -42,6 +42,26 @@ const deleteItemAlret = () => {
     })
 }
 
+
+const approveItemAlret = () => {
+    return MySwal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Approve it!'
+    })
+}
+const approveSwlFire = (mgs) => {
+    Swal.fire(
+        'Approved!',
+        `${mgs}`,
+        'success'
+    )
+}
+
 const swlFire = (mgs) => {
     Swal.fire(
         'Deleted!',
@@ -50,4 +70,4 @@ const swlFire = (mgs) => {
     )
 }
 
-export { successToast, errorToast, deleteItemAlret, swlFire }
+export { successToast, errorToast, deleteItemAlret, swlFire, approveItemAlret, approveSwlFire }
