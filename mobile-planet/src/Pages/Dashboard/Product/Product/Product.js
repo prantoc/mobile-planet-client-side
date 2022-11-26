@@ -150,7 +150,9 @@ const Product = () => {
                                         <td>
                                             {
                                                 isAdmin ?
-                                                    <Button variant={product.advertise === false ? 'warning' : product.advertise === true ? 'success disabled' : 'primary'} onClick={() => handleAdvertiseProduct(product._id)}>
+                                                    <Button variant={product.advertise === false ? 'warning' : product.advertise === true ? 'success disabled' : 'primary'}
+                                                        onClick={() => handleAdvertiseProduct(product._id)}>
+
                                                         {product.advertise === false ? 'Pending' : product.advertise === true ? 'Advertised' : 'Advertise'}
                                                     </Button>
                                                     :
