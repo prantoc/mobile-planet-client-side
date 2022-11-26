@@ -21,7 +21,7 @@ const Users = () => {
     })
 
 
-    const handleDeleteProduct = (id) => {
+    const handleDeleteUser = (id) => {
         deleteItemAlret()
             .then((result) => {
                 if (result.isConfirmed) {
@@ -108,13 +108,13 @@ const Users = () => {
                                         </td>
                                         <td>
                                             {
-                                                <span role='button' onClick={() => handleUserVerify(user._id, user.verified ? 'User Verified!' : 'User Unverified!')}>
+                                                <span role='button' onClick={() => handleUserVerify(user._id, user.verified ? 'User Unverified!' : 'User Verified!')}>
                                                     {user.verified ? <FaCheckCircle title='Click to verify user' className='text-primary'></FaCheckCircle> : <FaCheckCircle className='text-secondary'></FaCheckCircle>}
                                                 </span>
                                             }
                                         </td>
                                         <td>
-                                            <Button variant='danger' onClick={() => handleDeleteProduct(user._id)}>Delete</Button>
+                                            <Button variant='danger' onClick={() => handleDeleteUser(user._id)}>Delete</Button>
                                         </td>
                                     </tr>
                                 )
