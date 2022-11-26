@@ -15,7 +15,7 @@ const Products = () => {
         <>
             <Container fluid className='my-5'>
                 <Row>
-                    <Col md={9} sm={12}>
+                    <Col lg={9} md={8} sm={12} className="order-2 order-lg-0">
                         <Row>
                             {
                                 products.length > 0 ?
@@ -27,7 +27,7 @@ const Products = () => {
                             }
                         </Row>
                     </Col>
-                    <Col md={3} sm={12}>
+                    <Col lg={3} md={4} sm={12} className="order-1 order-lg-0">
                         <Sidebar ></Sidebar>
                     </Col>
 

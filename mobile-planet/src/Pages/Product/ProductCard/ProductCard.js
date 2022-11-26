@@ -1,27 +1,32 @@
 import React from 'react';
-import { Badge, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
-
-const ProductCard = () => {
+import { FaMapMarkerAlt } from "react-icons/fa";
+const ProductCard = ({ product }) => {
     return (
         <>
-            <Col md={6} className="animate__animated animate__backInLeft">
+            <Col lg={6} className="animate__animated animate__backInLeft">
                 <Link className='nav-link'>
-                    <div className="card mb-3 shadow-lg p-3 bg-body rounded border-0 mx-auto" style={{ maxWidth: "540px" }}>
+                    <div className="card mb-3 shadow-sm px-3 bg-body rounded border-0 mx-auto advertise-card" >
                         <div className="row g-0">
                             <div className="col-md-4">
-                                <img className="img-fluid rounded-start h-100" src='' alt="" />
+                                <img className="img-fluid rounded-start h-100" src={product.productImage} alt="" />
                             </div>
                             <div className="col-md-8">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center mb-2">
-                                        <h4 className="card-title">Card title</h4>
-                                        <Badge bg="primary">Advertised</Badge>
+                                        <h4 className="card-title">{product.productName}</h4>
+                                        <span className=' advertise-tag position-absolute end-0' bg="primary">Advertised</span>
                                     </div>
-                                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div className="d-flex justify-content-between align-items-center">
-                                        <span className='fw-bold' style={{ color: "#00a0ff" }}>$200</span>
-                                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                                    <div>
+                                        <span className='me-1'><FaMapMarkerAlt></FaMapMarkerAlt> {product.location},</span>
+                                        <span>{product.productCategory}</span> <br />
+                                        <span className='fw-bold' style={{ color: "#00a0ff" }}>${product.resellPrice}</span>
+                                    </div>
+                                    <div className="d-flex justify-content-end align-items-center mt-3">
+
+                                        <p className="card-text"><small className="text-muted">{moment(product.createdAt,).startOf('hour').fromNow()}</small></p>
                                     </div>
                                 </div>
                             </div>

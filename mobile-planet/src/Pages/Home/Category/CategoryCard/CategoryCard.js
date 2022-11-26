@@ -8,7 +8,7 @@ const CategoryCard = ({ category }) => {
         <>
             <Col md={3} className="mb-2 text-center animate__animated animate__backInUp">
                 <Link to={`/category/${_id}`} className='nav-link'>
-                    <Card>
+                    <Card className='advertise-card'>
                         <Card.Body className='fw-bold'> <img src={categoryImage} alt="" /> {categoryName}</Card.Body>
                     </Card>
                 </Link>
