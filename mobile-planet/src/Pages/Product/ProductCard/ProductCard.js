@@ -7,7 +7,7 @@ const ProductCard = ({ product }) => {
     return (
         <>
             <Col lg={6} className="animate__animated animate__backInLeft">
-                <Link className='nav-link'>
+                <Link to={`/product/${product.productName}`} className='nav-link'>
                     <div className="card mb-3 shadow-sm px-3 bg-body rounded border-0 mx-auto advertise-card" >
                         <div className="row g-0">
                             <div className="col-md-4">
