@@ -7,7 +7,7 @@ const ProductCard = ({ product }) => {
     return (
         <>
             <Col lg={6} className="animate__animated animate__backInLeft">
-                <Link to={`/product/${product.productName}`} className='nav-link'>
+                <Link to={`/product-details/${product._id}`} className='nav-link'>
                     <div className="card mb-3 shadow-sm px-3 bg-body rounded border-0 mx-auto advertise-card" >
                         <div className="row g-0">
                             <div className="col-md-4">
@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
                             <div className="col-md-8">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center mb-2">
-                                        <h4 className="card-title">{product.productName}</h4>
+                                        <h5 className="card-title">{product.productName}</h5>
                                         <span className=' advertise-tag position-absolute end-0' bg="primary">Advertised</span>
                                     </div>
                                     <div>

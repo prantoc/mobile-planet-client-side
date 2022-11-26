@@ -8,6 +8,7 @@ import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Product from "../../Pages/Dashboard/Product/Product/Product";
 import Users from "../../Pages/Dashboard/Users/Users/Users";
 import Home from "../../Pages/Home/Home/Home";
+import ProductDetails from "../../Pages/Product/ProductDetails/ProductDetails";
 import Products from "../../Pages/Product/Products/Products";
 import Error from "../../Pages/Shared/Error/Error";
 import AdminRoute from "../AdminRoute/AdminRoute";
@@ -30,9 +31,9 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/category/${params.name}`)
             },
             {
-                path: "/product/:name",
-                element: <Products></Products>,
-                loader: ({ params }) => fetch(`http://localhost:5000/product/${params.name}`)
+                path: "/product-details/:id",
+                element: <ProductDetails></ProductDetails>,
+                loader: ({ params }) => fetch(`http://localhost:5000/product-details/${params.id}`)
             },
             {
                 path: "/login",
