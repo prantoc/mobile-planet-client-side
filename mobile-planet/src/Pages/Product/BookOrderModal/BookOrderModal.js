@@ -24,7 +24,7 @@ const BookOrderModal = ({ user, handleClose, setShow, show, product }) => {
             }
         }
 
-        axios.post('http://localhost:5000/add-product', bookOrder, config)
+        axios.post('http://localhost:5000/book-product', bookOrder, config)
             .then(res => {
                 if (res.data.acknowledged) {
                     setShow(false)
