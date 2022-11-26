@@ -46,12 +46,12 @@ const NavBar = () => {
                             <LinkContainer to="blog">
                                 <Nav.Link>Blog</Nav.Link>
                             </LinkContainer>
-                            {isAdmin && <LinkContainer to="/dashboard">
-                                <Nav.Link className='cs-color-primary fw-bold'>Admin-Dashboard</Nav.Link>
-                            </LinkContainer>}
-                            {isSeller && <LinkContainer to="/dashboard/seller/product">
+                            <LinkContainer to={isAdmin ? '/dashboard' : '/dashboard/seller/product'}>
+                                <Nav.Link className='cs-color-primary fw-bold'>Dashboard</Nav.Link>
+                            </LinkContainer>
+                            {/* {isSeller && <LinkContainer to="">
                                 <Nav.Link className='cs-color-primary fw-bold'>Seller-Dashboard</Nav.Link>
-                            </LinkContainer>}
+                            </LinkContainer>} */}
                         </Nav>
                     </Navbar.Collapse>
                     <div className='py-1 d-flex justify-content-end'>
@@ -64,6 +64,8 @@ const NavBar = () => {
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu className='position-absolute end-100 translate-middle-x' style={{ zIndex: '9999' }}>
                                         <Dropdown.Item >{user?.displayName}</Dropdown.Item>
+                                        <Dropdown.Item >Booked Items</Dropdown.Item>
+                                        <Dropdown.Item >Wishlist Items</Dropdown.Item>
                                         <Dropdown.Item onClick={userLogout}>Logout</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
