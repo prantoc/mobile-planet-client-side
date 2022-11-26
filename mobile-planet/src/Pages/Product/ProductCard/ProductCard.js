@@ -20,11 +20,10 @@ const ProductCard = ({ product }) => {
                                         <span className=' advertise-tag position-absolute end-0' bg="primary">Advertised</span>
                                     </div>
                                     <div>
-                                        <span className='me-1'><FaMapMarkerAlt></FaMapMarkerAlt> {product.location},</span>
-                                        <span>{product.productCategory}</span> <br />
+                                        <span className='mb-2 d-block'><FaMapMarkerAlt></FaMapMarkerAlt> {product.location}, {product.productCategory}</span>
                                         <span className='fw-bold' style={{ color: "#00a0ff" }}>${product.resellPrice}</span>
                                     </div>
-                                    <div className="d-flex justify-content-end align-items-center mt-3">
+                                    <div className="d-flex justify-content-end align-items-center">
 
                                         <p className="card-text"><small className="text-muted">{moment(product.createdAt,).startOf('hour').fromNow()}</small></p>
                                     </div>
