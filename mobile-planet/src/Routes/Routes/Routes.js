@@ -9,6 +9,7 @@ import Product from "../../Pages/Dashboard/Product/Product/Product";
 import Users from "../../Pages/Dashboard/Users/Users/Users";
 import Home from "../../Pages/Home/Home/Home";
 import Products from "../../Pages/Product/Products/Products";
+import Error from "../../Pages/Shared/Error/Error";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <FrontendLayout />,
+        errorElement: <Error />,
         children: [
             {
                 path: "/",
@@ -40,6 +42,7 @@ export const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+        errorElement: <Error />,
         children: [
             {
                 path: "/dashboard",
