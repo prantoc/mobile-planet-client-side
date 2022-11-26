@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
 import { successToast } from '../../../../toast/Toaster';
 
-const ProductModal = ({ handleClose, setShow, show, refetch }) => {
+const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
     const [load, setLoad] = useState(false);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const imgHostKey = process.env.REACT_APP_IMGBB_KEY;
@@ -33,11 +33,11 @@ const ProductModal = ({ handleClose, setShow, show, refetch }) => {
             .then(res => res.json())
             .then(imgData => {
                 if (imgData.success) {
-                    const { name, productCat, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerNumber } = data
+                    const { name, productCat, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerNumber, sellerEmail } = data
                     const productImage = imgData.data.url
                     const today = new Date();
                     const product = {
-                        productName: name, productCategory: productCat, productImage, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerNumber, displayListing: false, createdAt: today
+                        productName: name, productCategory: productCat, productImage, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerEmail, sellerNumber, displayListing: false, createdAt: today
                     }
 
                     const config = {
@@ -174,16 +174,25 @@ const ProductModal = ({ handleClose, setShow, show, refetch }) => {
                                 </div>
                             </div>
 
-                            <div className="col-md-6">
+                            <div className="col-md-4">
                                 <div className="mb-4">
-                                    <label htmlFor="exampleInputName" className="form-label">Seller name</label>
+                                    <label htmlFor="exampleInputName" className="form-label">Seller Name</label>
                                     <input {...register("sellerName", {
                                         required: { value: true, message: "Seller name is required" },
-                                    })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.sellerName ? "true" : "false"} />
+                                    })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.sellerName ? "true" : "false"} disabled defaultValue={user.displayName} />
                                     {errors.sellerName && <p className='text-danger fw-bold my-1' role="alert">{errors.sellerName?.message}</p>}
                                 </div>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-4">
+                                <div className="mb-4">
+                                    <label htmlFor="exampleInputName" className="form-label">Seller Email</label>
+                                    <input {...register("sellerEmail", {
+                                        required: { value: true, message: "Seller email is required" },
+                                    })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.sellerEmail ? "true" : "false"} disabled defaultValue={user.email} />
+                                    {errors.sellerEmail && <p className='text-danger fw-bold my-1' role="alert">{errors.sellerEmail?.message}</p>}
+                                </div>
+                            </div>
+                            <div className="col-md-4">
                                 <div className="mb-4">
                                     <label htmlFor="exampleInputName" className="form-label">Seller Mobile Number</label>
                                     <input {...register("sellerNumber", {

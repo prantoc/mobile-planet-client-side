@@ -51,7 +51,7 @@ const approveItemAlret = () => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Approve it!'
+        confirmButtonText: 'Yes, confirm it!'
     })
 }
 const approveSwlFire = (mgs) => {

@@ -1,14 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Image, Table } from 'react-bootstrap';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { AuthContext } from '../../../../contexts/AuthProvider';
+import { useAdmin } from '../../../../hooks/useAdmin';
 import { approveItemAlret, approveSwlFire, deleteItemAlret, swlFire } from '../../../../toast/Toaster';
 import Loading from '../../../Shared/Loading/Loading';
 import ProductModal from '../ProductModal/ProductModal';
 
 const Product = () => {
+    const { user } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -48,7 +52,7 @@ const Product = () => {
     }
 
 
-    const handleDisplayProduct = (id) => {
+    const handleDisplayProduct = (id, mgs) => {
         approveItemAlret()
             .then((result) => {
                 if (result.isConfirmed) {
@@ -61,7 +65,7 @@ const Product = () => {
                         .then(res => res.json())
                         .then(res => {
                             if (res.acknowledged) {
-                                approveSwlFire('Product approved for listing!')
+                                approveSwlFire(mgs)
                                 refetch()
                             }
                         })
@@ -120,7 +124,18 @@ const Product = () => {
                                     <td>{product.sellerName}</td>
                                     <td>{product.sellerNumber}</td>
                                     <td>{moment(product.createdAt, "YYYYMMDD").format('MMMM Do YYYY')}</td>
-                                    <td>  <Button variant='success' disabled={product.displayListing} onClick={() => handleDisplayProduct(product._id)}>{product.displayListing ? 'Approved' : 'Approve'}</Button></td>
+                                    <td>
+                                        {
+                                            isAdmin ?
+                                                <span role='button' onClick={() => handleDisplayProduct(product._id, product.displayListing ? 'Product hide for listing' : 'Product showed for listing')}>
+                                                    {product.displayListing ? <FaRegEye className='text-success'></FaRegEye> : <FaRegEyeSlash className='text-danger'></FaRegEyeSlash>}
+                                                </span>
+                                                :
+                                                <span>
+                                                    {product.displayListing ? <FaRegEye className='text-success'></FaRegEye> : <FaRegEyeSlash className='text-danger'></FaRegEyeSlash>}
+                                                </span>
+                                        }
+                                    </td>
                                     <td>
                                         <Button variant='danger' onClick={() => handleDeleteProduct(product._id)}>Delete</Button>
                                     </td>
@@ -130,7 +145,7 @@ const Product = () => {
                 </Table>
             </div>
 
-            <ProductModal handleClose={handleClose} setShow={setShow} show={show} refetch={refetch}></ProductModal>
+            <ProductModal user={user} handleClose={handleClose} setShow={setShow} show={show} refetch={refetch}></ProductModal>
         </>
     );
 };
