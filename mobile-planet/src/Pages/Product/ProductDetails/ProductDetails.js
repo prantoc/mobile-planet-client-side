@@ -1,9 +1,8 @@
 import React from 'react';
-import { Badge, Col, Container, Row } from 'react-bootstrap';
+import { Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 import moment from 'moment';
-import CardImg from '../../../assets/banner/banner4.jpg'
 import { FaCheckCircle, FaHeart, FaMapMarkerAlt, FaPhoneAlt, FaShareSquare } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 const ProductDetails = () => {
@@ -31,7 +30,7 @@ const ProductDetails = () => {
                                         </div>
                                         <div className="card-body">
                                             <div>
-                                                <img className="img-fluid rounded-start h-100" src={CardImg} alt="" />
+                                                <img className="img-fluid rounded-start h-100" src={product.productImage} alt="" />
                                                 <h1 className='fw-bold mt-2' style={{ color: "#00a0ff" }}>${product.resellPrice}</h1>
 
                                                 <div className='row mb-5'>
@@ -61,9 +60,10 @@ const ProductDetails = () => {
                                 </div>
                                 <div className='col-md-4 mt-md-0 mt-5'>
                                     <div>
-                                        <div className="d-flex align-items-center mb-3">
-                                            <span className='me-5'> <FaShareSquare></FaShareSquare> Share</span>
+                                        <div className="d-flex align-items-center mb-3 justify-content-between">
+                                            <span> <FaShareSquare></FaShareSquare> Share</span>
                                             <span role="button"><FaHeart></FaHeart> Wishlist</span>
+                                            <span role="button"><Button>Book Now</Button> </span>
                                         </div>
                                         <div className="list-group w-auto">
                                             <div className="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">

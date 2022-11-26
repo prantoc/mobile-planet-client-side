@@ -3,6 +3,7 @@ import DashboardLayout from "../../Layout/DashboardLayout";
 import FrontendLayout from "../../Layout/FrontendLayout";
 import Login from "../../Pages/Auth/Login/Login";
 import SignUp from "../../Pages/Auth/SignUp/SignUp";
+import Blog from "../../Pages/Blog/Blog";
 import Category from "../../Pages/Dashboard/Category/Category/Category";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Product from "../../Pages/Dashboard/Product/Product/Product";
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
                 path: "/product-details/:id",
                 element: <ProductDetails></ProductDetails>,
                 loader: ({ params }) => fetch(`http://localhost:5000/product-details/${params.id}`)
+            },
+            {
+                path: "/blog",
+                element: <Blog></Blog>
             },
             {
                 path: "/login",
