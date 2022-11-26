@@ -50,7 +50,8 @@ const Login = () => {
                 const user = {
                     name: userData.displayName,
                     email: userData.email,
-                    role: 'buyer'
+                    role: 'buyer',
+                    verified: false
                 }
                 saveUser(user)
                 successToast(`Hi,${user.displayName}  You Logged in successfully`);

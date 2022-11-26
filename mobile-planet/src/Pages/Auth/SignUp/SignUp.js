@@ -25,7 +25,8 @@ const SignUp = () => {
         const user = {
             name,
             email,
-            role: type
+            role: type,
+            verified: false
         }
         signInWithEmailPass(email, password)
             .then(() => {
@@ -50,7 +51,8 @@ const SignUp = () => {
                 const user = {
                     name: userData.displayName,
                     email: userData.email,
-                    role: 'buyer'
+                    role: 'buyer',
+                    verified: false
                 }
                 saveUser(user)
                 successToast(`Hi,${userData.displayName}  You Logged in successfully`);
