@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 import moment from 'moment';
-import { FaCheckCircle, FaHeart, FaMapMarkerAlt, FaPhoneAlt, FaShareSquare } from 'react-icons/fa';
+import { FaCheckCircle, FaHeart, FaMapMarkerAlt, FaPhoneAlt, FaShareSquare, FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider';
+import BookOrderModal from '../BookOrderModal/BookOrderModal';
 const ProductDetails = () => {
+    const { user } = useContext(AuthContext);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
     const product = useLoaderData();
     const navigation = useNavigation()
     if (navigation.state === "loading") {
         return <Loading></Loading>
     }
+
+
+
+
+
+
+
+
+
     return (
         <>
             <Container className='py-4'>
@@ -63,7 +80,9 @@ const ProductDetails = () => {
                                         <div className="d-flex align-items-center mb-3 justify-content-between">
                                             <span> <FaShareSquare></FaShareSquare> Share</span>
                                             <span role="button"><FaHeart></FaHeart> Wishlist</span>
-                                            <span role="button"><Button>Book Now</Button> </span>
+                                            <Button variant="primary" onClick={handleShow}>
+                                                Book Now <FaShoppingCart></FaShoppingCart>
+                                            </Button>
                                         </div>
                                         <div className="list-group w-auto">
                                             <div className="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
@@ -122,6 +141,8 @@ const ProductDetails = () => {
                     </Col>
                 </Row>
             </Container>
+
+            <BookOrderModal user={user} handleClose={handleClose} setShow={setShow} show={show} product={product}></BookOrderModal>
 
         </>
     );

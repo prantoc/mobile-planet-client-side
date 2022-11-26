@@ -191,7 +191,7 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
                                 <div className="mb-4">
                                     <label htmlFor="exampleInputName" className="form-label">Your Mobile Number</label>
                                     <input {...register("sellerNumber", {
-                                        required: { value: true, message: "Seller Mobile Number is required" },
+                                        required: { value: true, message: "Mobile Number is required" },
                                     })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.sellerNumber ? "true" : "false"} />
                                     {errors.sellerNumber && <p className='text-danger fw-bold my-1' role="alert">{errors.sellerNumber?.message}</p>}
                                 </div>

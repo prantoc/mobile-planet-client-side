@@ -83,11 +83,11 @@ const Product = () => {
         <>
             <h3>Products</h3>
             <div className='shadow-lg p-3 my-3 bg-body rounded'>
-                <div className="d-flex justify-content-end align-items-center mb-5">
+                {!isAdmin && <div className="d-flex justify-content-end align-items-center mb-5">
                     <Button variant="primary" onClick={handleShow}>
                         Add a Product <FaPlus></FaPlus>
                     </Button>
-                </div>
+                </div>}
                 <Table striped>
                     <thead className='text-center'>
                         <tr>
