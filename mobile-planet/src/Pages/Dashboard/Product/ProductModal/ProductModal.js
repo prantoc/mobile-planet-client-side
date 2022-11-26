@@ -51,7 +51,8 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
                     const productImage = imgData.data.url
                     const today = new Date();
                     const product = {
-                        productName: name, productCategory: productCat, productImage, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName: user.displayName, sellerEmail: user.email, sellerNumber, verifiedSeller: sellerdata.verified, displayListing: false, createdAt: today
+                        productName: name, productCategory: productCat, productImage, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName: user.displayName, sellerEmail: user.email, sellerNumber, verifiedSeller: sellerdata.verified, displayListing: false, createdAt: today,
+                        advertise: 'pending'
                     }
 
                     const config = {

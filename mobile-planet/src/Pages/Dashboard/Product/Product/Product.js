@@ -69,10 +69,31 @@ const Product = () => {
                                 refetch()
                             }
                         })
-
                 }
             })
+    }
 
+
+
+    const handleAdvertiseProduct = (id) => {
+        approveItemAlret()
+            .then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`http://localhost:5000/productAdvertise/${id}`, {
+                        method: 'get',
+                        headers: {
+                            authorization: `bearer ${localStorage.getItem('mobile-planet')}`
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res.acknowledged) {
+                                approveSwlFire('Product Advertise Request Sent')
+                                refetch()
+                            }
+                        })
+                }
+            })
     }
 
 
@@ -101,6 +122,7 @@ const Product = () => {
                             <th>Seller Name</th>
                             <th>Seller Number</th>
                             <th>Created At</th>
+                            <th>Advertise<FaQuestion title='Click the button to advertise your product'></FaQuestion></th>
                             <th>Display Listing<FaQuestion title='Click the button to display and hide for listing'></FaQuestion></th>
                             <th>Action</th>
                         </tr>
@@ -117,7 +139,7 @@ const Product = () => {
                                         <td>{product.productCategory}</td>
                                         <td>{product.productName}</td>
                                         <td>
-                                            <Image roundedCircle style={{ height: '48px' }} src={product.productImage} />
+                                            <Image style={{ height: '48px' }} src={product.productImage} />
                                         </td>
                                         <td>{product.location}</td>
                                         <td>${product.resellPrice}</td>
@@ -125,6 +147,21 @@ const Product = () => {
                                         <td>{product.sellerName}</td>
                                         <td>{product.sellerNumber}</td>
                                         <td>{moment(product.createdAt, "YYYYMMDD").format('MMMM Do YYYY')}</td>
+                                        <td>
+                                            {
+                                                isAdmin ?
+                                                    <Button variant={product.advertise === false ? 'warning' : product.advertise === true ? 'success disabled' : 'primary'} onClick={() => handleAdvertiseProduct(product._id)}>
+                                                        {product.advertise === false ? 'Pending' : product.advertise === true ? 'Advertised' : 'Advertise'}
+                                                    </Button>
+                                                    :
+                                                    <Button variant={product.advertise === false ? 'warning disabled' : product.advertise === true ? 'success disabled' : 'primary'} onClick={() => handleAdvertiseProduct(product._id)}>
+                                                        {product.advertise === false ? 'Pending' : product.advertise === true ? 'Advertised' : 'Advertise'}
+                                                    </Button>
+
+                                            }
+
+                                        </td>
+
                                         <td>
                                             {
                                                 isAdmin ?
