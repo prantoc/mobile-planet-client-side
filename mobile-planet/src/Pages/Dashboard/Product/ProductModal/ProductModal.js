@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
@@ -19,6 +19,21 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
         }).then(res => res.json())
 
     })
+    const [sellerdata, setSellerData] = useState('');
+    useEffect(() => {
+        const config = {
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('mobile-planet')}`
+            }
+        }
+        axios.get(`http://localhost:5000/user/${user?.email}`, config)
+            .then(res => {
+                setSellerData(res.data)
+            })
+    }, [user?.email, setSellerData])
+
+
 
     const handleAddProduct = data => {
         setLoad(true)
@@ -33,11 +48,11 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
             .then(res => res.json())
             .then(imgData => {
                 if (imgData.success) {
-                    const { name, productCat, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerNumber, sellerEmail } = data
+                    const { name, productCat, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerNumber } = data
                     const productImage = imgData.data.url
                     const today = new Date();
                     const product = {
-                        productName: name, productCategory: productCat, productImage, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName, sellerEmail, sellerNumber, displayListing: false, createdAt: today
+                        productName: name, productCategory: productCat, productImage, location, resellPrice, orginalPrice, usedYear, condition, description, purchaseYear, sellerName: user.displayName, sellerEmail: user.email, sellerNumber, verifiedSeller: sellerdata.verified, displayListing: false, createdAt: today
                     }
 
                     const config = {
@@ -164,7 +179,7 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
                                 </div>
                             </div>
 
-                            <div className="col-md-12">
+                            <div className="col-md-8">
                                 <div className="mb-4">
                                     <label htmlFor="exampleInputName" className="form-label">Product Description</label>
                                     <textarea {...register("description", {
@@ -173,28 +188,9 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
                                     {errors.description && <p className='text-danger fw-bold my-1' role="alert">{errors.description?.message}</p>}
                                 </div>
                             </div>
-
                             <div className="col-md-4">
                                 <div className="mb-4">
-                                    <label htmlFor="exampleInputName" className="form-label">Seller Name</label>
-                                    <input {...register("sellerName", {
-                                        required: { value: true, message: "Seller name is required" },
-                                    })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.sellerName ? "true" : "false"} disabled defaultValue={user.displayName} />
-                                    {errors.sellerName && <p className='text-danger fw-bold my-1' role="alert">{errors.sellerName?.message}</p>}
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="mb-4">
-                                    <label htmlFor="exampleInputName" className="form-label">Seller Email</label>
-                                    <input {...register("sellerEmail", {
-                                        required: { value: true, message: "Seller email is required" },
-                                    })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.sellerEmail ? "true" : "false"} disabled defaultValue={user.email} />
-                                    {errors.sellerEmail && <p className='text-danger fw-bold my-1' role="alert">{errors.sellerEmail?.message}</p>}
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="mb-4">
-                                    <label htmlFor="exampleInputName" className="form-label">Seller Mobile Number</label>
+                                    <label htmlFor="exampleInputName" className="form-label">Your Mobile Number</label>
                                     <input {...register("sellerNumber", {
                                         required: { value: true, message: "Seller Mobile Number is required" },
                                     })} type="text" className="form-control" id="exampleInputName" aria-invalid={errors.sellerNumber ? "true" : "false"} />

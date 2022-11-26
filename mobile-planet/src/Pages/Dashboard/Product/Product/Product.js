@@ -56,7 +56,7 @@ const Product = () => {
         approveItemAlret()
             .then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`http://localhost:5000/pro/${id}`, {
+                    fetch(`http://localhost:5000/product/${id}`, {
                         method: 'PUT',
                         headers: {
                             authorization: `bearer ${localStorage.getItem('mobile-planet')}`
