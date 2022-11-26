@@ -7,27 +7,20 @@ import { FaCheckCircle, FaHeart, FaMapMarkerAlt, FaPhoneAlt, FaShareSquare, FaSh
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import BookOrderModal from '../BookOrderModal/BookOrderModal';
+import { useAdmin } from '../../../hooks/useAdmin';
+import { useSeller } from '../../../hooks/useSeller';
 const ProductDetails = () => {
     const { user } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email)
+    const [isSeller] = useSeller(user?.email)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-
     const product = useLoaderData();
     const navigation = useNavigation()
     if (navigation.state === "loading") {
         return <Loading></Loading>
     }
-
-
-
-
-
-
-
-
-
     return (
         <>
             <Container className='py-4'>
@@ -79,10 +72,10 @@ const ProductDetails = () => {
                                     <div>
                                         <div className="d-flex align-items-center mb-3 justify-content-between">
                                             <span> <FaShareSquare></FaShareSquare> Share</span>
-                                            <span role="button"><FaHeart></FaHeart> Wishlist</span>
-                                            <Button variant="primary" onClick={handleShow}>
+                                            {!isAdmin && !isSeller && <span role="button"><FaHeart></FaHeart> Wishlist</span>}
+                                            {!isAdmin && !isSeller && <Button variant="primary" onClick={handleShow}>
                                                 Book Now <FaShoppingCart></FaShoppingCart>
-                                            </Button>
+                                            </Button>}
                                         </div>
                                         <div className="list-group w-auto">
                                             <div className="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
