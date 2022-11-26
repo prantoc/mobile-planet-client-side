@@ -16,11 +16,12 @@ const Product = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const url = `http://localhost:5000/product/${user.email}`
     const { data: products, isLoading, refetch } = useQuery({
         queryKey: ['product'],
-        queryFn: () => fetch(`http://localhost:5000/product`, {
+        queryFn: () => fetch(url, {
             headers: {
-                authoraization: `bearer ${localStorage.getItem('mobile-planet')}`
+                authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
         }).then(res => res.json())
 
@@ -33,7 +34,6 @@ const Product = () => {
                 if (result.isConfirmed) {
                     const config = {
                         headers: {
-                            'content-type': 'application/json',
                             authorization: `bearer ${localStorage.getItem('mobile-planet')}`
                         }
                     }
@@ -109,38 +109,46 @@ const Product = () => {
                         {isLoading ?
                             <Loading></Loading>
                             :
-                            products.length > 0 && products?.map((product, i) =>
-                                <tr key={i} className="align-content-center text-center">
-                                    <td>{i + 1}</td>
+                            products.length > 0 ?
+                                products?.map((product, i) =>
+                                    <tr key={i} className="align-content-center text-center">
+                                        <td>{i + 1}</td>
 
-                                    <td>{product.productCategory}</td>
-                                    <td>{product.productName}</td>
-                                    <td>
-                                        <Image roundedCircle style={{ height: '48px' }} src={product.productImage} />
-                                    </td>
-                                    <td>{product.location}</td>
-                                    <td>${product.resellPrice}</td>
-                                    <td>${product.orginalPrice}</td>
-                                    <td>{product.sellerName}</td>
-                                    <td>{product.sellerNumber}</td>
-                                    <td>{moment(product.createdAt, "YYYYMMDD").format('MMMM Do YYYY')}</td>
-                                    <td>
-                                        {
-                                            isAdmin ?
-                                                <span role='button' onClick={() => handleDisplayProduct(product._id, product.displayListing ? 'Product hide for listing' : 'Product showed for listing')}>
-                                                    {product.displayListing ? <FaRegEye className='text-success'></FaRegEye> : <FaRegEyeSlash className='text-danger'></FaRegEyeSlash>}
-                                                </span>
-                                                :
-                                                <span>
-                                                    {product.displayListing ? <FaRegEye className='text-success'></FaRegEye> : <FaRegEyeSlash className='text-danger'></FaRegEyeSlash>}
-                                                </span>
-                                        }
-                                    </td>
-                                    <td>
-                                        <Button variant='danger' onClick={() => handleDeleteProduct(product._id)}>Delete</Button>
+                                        <td>{product.productCategory}</td>
+                                        <td>{product.productName}</td>
+                                        <td>
+                                            <Image roundedCircle style={{ height: '48px' }} src={product.productImage} />
+                                        </td>
+                                        <td>{product.location}</td>
+                                        <td>${product.resellPrice}</td>
+                                        <td>${product.orginalPrice}</td>
+                                        <td>{product.sellerName}</td>
+                                        <td>{product.sellerNumber}</td>
+                                        <td>{moment(product.createdAt, "YYYYMMDD").format('MMMM Do YYYY')}</td>
+                                        <td>
+                                            {
+                                                isAdmin ?
+                                                    <span role='button' onClick={() => handleDisplayProduct(product._id, product.displayListing ? 'Product hide for listing' : 'Product showed for listing')}>
+                                                        {product.displayListing ? <FaRegEye className='text-success'></FaRegEye> : <FaRegEyeSlash className='text-danger'></FaRegEyeSlash>}
+                                                    </span>
+                                                    :
+                                                    <span>
+                                                        {product.displayListing ? <FaRegEye className='text-success'></FaRegEye> : <FaRegEyeSlash className='text-danger'></FaRegEyeSlash>}
+                                                    </span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <Button variant='danger' onClick={() => handleDeleteProduct(product._id)}>Delete</Button>
+                                        </td>
+                                    </tr>
+                                )
+                                :
+                                <tr >
+                                    <td colSpan="12" className="text-center">
+                                        <h2 className='btn btn-danger col-4'>No Data Found !</h2>
                                     </td>
                                 </tr>
-                            )}
+                        }
                     </tbody>
                 </Table>
             </div>

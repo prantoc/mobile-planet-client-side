@@ -14,7 +14,7 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
         queryKey: ['category'],
         queryFn: () => fetch(`http://localhost:5000/category-name`, {
             headers: {
-                authoraization: `bearer ${localStorage.getItem('mobile-planet')}`
+                authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
         }).then(res => res.json())
 
@@ -23,7 +23,6 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
     useEffect(() => {
         const config = {
             headers: {
-                'content-type': 'application/json',
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
         }
