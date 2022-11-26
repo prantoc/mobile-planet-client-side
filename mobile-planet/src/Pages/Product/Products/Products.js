@@ -7,7 +7,6 @@ import Sidebar from '../Sidebar/Sidebar';
 
 const Products = () => {
     const products = useLoaderData();
-    console.log(products);
     const navigation = useNavigation()
     if (navigation.state === "loading") {
         return <Loading></Loading>
@@ -19,7 +18,12 @@ const Products = () => {
                     <Col md={9} sm={12}>
                         <Row>
                             {
-                                products.map(product => <ProductCard key={product._id} product={product}></ProductCard>)
+                                products.length > 0 ?
+                                    products.map(product => <ProductCard key={product._id} product={product}></ProductCard>)
+                                    :
+                                    <div className="text-center">
+                                        <h2 className='btn btn-danger col-4'>No Data Found !</h2>
+                                    </div>
                             }
                         </Row>
                     </Col>
