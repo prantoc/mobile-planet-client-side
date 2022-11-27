@@ -35,29 +35,30 @@ const NavBar = () => {
                     <Navbar.Toggle aria-controls="navbarScroll" className='' />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
-                            className="me-auto my-2 my-lg-0"
+                            className="me-auto my-2 my-lg-0 fw-bold"
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
                             <LinkContainer to="/">
                                 <Nav.Link>Home</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to="services">
+                            <LinkContainer to="all-products">
                                 <Nav.Link>All Products</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to="blog">
                                 <Nav.Link>Blog</Nav.Link>
                             </LinkContainer>
+                            {!isSeller && !isAdmin && user && <LinkContainer to="/wishlist-items">
+                                <Nav.Link >Wish List</Nav.Link>
+                            </LinkContainer>}
                             {
                                 user
                                 &&
                                 <LinkContainer to={isAdmin ? '/dashboard' : isSeller ? '/dashboard/seller/product' : '/booked-items'}>
-                                    <Nav.Link className='cs-color-primary fw-bold'>{isAdmin ? 'Dashboard' : isSeller ? 'Dashboard' : 'Booked Items'}</Nav.Link>
+                                    <Nav.Link >{isAdmin ? 'Dashboard' : isSeller ? 'Dashboard' : 'Booked Items'}</Nav.Link>
                                 </LinkContainer>
                             }
-                            {!isSeller && !isAdmin && user && <LinkContainer to="">
-                                <Nav.Link className='cs-color-primary fw-bold'>Wish List</Nav.Link>
-                            </LinkContainer>}
+
                         </Nav>
                     </Navbar.Collapse>
                     <div className='py-1 d-flex justify-content-end'>
@@ -70,8 +71,8 @@ const NavBar = () => {
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu className='position-absolute end-100 translate-middle-x' style={{ zIndex: '9999' }}>
                                         <Dropdown.Item >{user?.displayName}</Dropdown.Item>
-                                        <Dropdown.Item >Booked Items</Dropdown.Item>
-                                        <Dropdown.Item >Wishlist Items</Dropdown.Item>
+                                        <Dropdown.Item ><Link className='nav-link' to='wishlist-items'>Booked Items</Link></Dropdown.Item>
+                                        <Dropdown.Item ><Link className='nav-link' to='wishlist-items'>Wishlist Items</Link></Dropdown.Item>
                                         <Dropdown.Item onClick={userLogout}>Logout</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>

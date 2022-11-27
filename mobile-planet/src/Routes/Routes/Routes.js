@@ -5,6 +5,7 @@ import Login from "../../Pages/Auth/Login/Login";
 import SignUp from "../../Pages/Auth/SignUp/SignUp";
 import Blog from "../../Pages/Blog/Blog";
 import ReviewItems from "../../Pages/Buyer/ReviewItems/ReviewItems";
+import WishlistItems from "../../Pages/Buyer/WishlistItems/WishlistItems";
 import Category from "../../Pages/Dashboard/Category/Category/Category";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Product from "../../Pages/Dashboard/Product/Product/Product";
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
             {
                 path: "/booked-items",
                 element: <ReviewItems></ReviewItems>
+            },
+            {
+                path: "/wishlist-items",
+                element: <WishlistItems></WishlistItems>
             },
             {
                 path: "/login",
