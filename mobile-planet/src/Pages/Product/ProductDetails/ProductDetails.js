@@ -16,14 +16,14 @@ const ProductDetails = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
     const [isSeller] = useSeller(user?.email)
+    const product = useLoaderData();
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const product = useLoaderData();
     const navigation = useNavigation()
-    const { data: bookedProduct, isLoading, refetch } = useQuery({
-        queryKey: ['bookedProduct', product?._id],
-        queryFn: () => fetch(`http://localhost:5000/bookedProduct?id=${product?._id}`, {
+    const { data: bookedProduct = {}, isLoading, refetch } = useQuery({
+        queryKey: ['booked-product', user?.email, product?._id],
+        queryFn: () => fetch(`http://localhost:5000/bookedProduct?email=${user?.email}&id=${product?._id}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }

@@ -28,9 +28,9 @@ const BookOrderModal = ({ user, handleClose, setShow, show, product, refetch }) 
             .then(res => {
                 if (res.data.acknowledged) {
                     setShow(false)
+                    setLoad(false)
                     successToast('You booked a product successfully!')
                     refetch()
-                    setLoad(false)
                     reset()
                 }
             })
