@@ -42,6 +42,11 @@ const DashboardSidebar = () => {
                                 <FaShoppingCart></FaShoppingCart> Products
                             </Link>}
                         </li>
+                        <li className="nav-item">
+                            {isSeller && <Link to="/dashboard/seller/buyers-list" className="nav-link">
+                                <FaUserFriends></FaUserFriends> Buyers
+                            </Link>}
+                        </li>
                         {/* <li className="nav-item">
                             <Link className="nav-link" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-file align-text-bottom me-1" aria-hidden="true"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>

@@ -8,6 +8,7 @@ import ReviewItems from "../../Pages/Buyer/ReviewItems/ReviewItems";
 import Category from "../../Pages/Dashboard/Category/Category/Category";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Product from "../../Pages/Dashboard/Product/Product/Product";
+import Buyers from "../../Pages/Dashboard/Users/Buyers/Buyers";
 import Users from "../../Pages/Dashboard/Users/Users/Users";
 import Home from "../../Pages/Home/Home/Home";
 import ProductDetails from "../../Pages/Product/ProductDetails/ProductDetails";
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/seller/product",
                 element: <SellerRoute><Product></Product></SellerRoute>
+            },
+            {
+                path: "/dashboard/seller/buyers-list",
+                element: <SellerRoute><Buyers></Buyers> </SellerRoute>
             },
         ]
     },

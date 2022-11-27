@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Container, Dropdown, Image, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/logo/logo.png'
 import '../../../assets/css/main/main.css'
 import { AuthContext } from '../../../contexts/AuthProvider';
@@ -13,10 +13,12 @@ const NavBar = () => {
     const { user, logoutUser } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
     const [isSeller] = useSeller(user?.email)
+    const navigate = useNavigate()
     const userLogout = () => {
         logoutUser()
             .then(() => {
                 successToast(' Sign-out successful');
+                navigate('/login')
             }).catch((e) => {
                 errorToast(e);
             });
@@ -53,7 +55,7 @@ const NavBar = () => {
                                     <Nav.Link className='cs-color-primary fw-bold'>{isAdmin ? 'Dashboard' : isSeller ? 'Dashboard' : 'Booked Items'}</Nav.Link>
                                 </LinkContainer>
                             }
-                            {!isSeller && !isAdmin && <LinkContainer to="">
+                            {!isSeller && !isAdmin && user && <LinkContainer to="">
                                 <Nav.Link className='cs-color-primary fw-bold'>Wish List</Nav.Link>
                             </LinkContainer>}
                         </Nav>
