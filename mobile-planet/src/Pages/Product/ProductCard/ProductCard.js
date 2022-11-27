@@ -17,7 +17,8 @@ const ProductCard = ({ product }) => {
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center mb-2">
                                         <h5 className="card-title">{product.productName}</h5>
-                                        <span className=' advertise-tag position-absolute end-0' bg="primary">Advertised</span>
+                                        {product.advertise === true &&
+                                            <span className=' advertise-tag position-absolute end-0' bg="primary">Advertised</span>}
                                     </div>
                                     <div>
                                         <span className='mb-2 d-block'><FaMapMarkerAlt></FaMapMarkerAlt> {product.location}, {product.productCategory}</span>
