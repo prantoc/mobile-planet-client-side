@@ -22,15 +22,15 @@ const ProductDetails = () => {
     const product = useLoaderData();
     const navigation = useNavigation()
     const { data: bookedProduct, isLoading, refetch } = useQuery({
-        queryKey: ['bookedProduct', user?.email, product?._id],
-        queryFn: () => fetch(`http://localhost:5000/bookedProduct?email=${user?.email}&id=${product?._id}`, {
+        queryKey: ['bookedProduct', product?._id],
+        queryFn: () => fetch(`http://localhost:5000/bookedProduct?id=${product?._id}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
         }).then(res => res.json())
 
     })
-
+    console.log(bookedProduct);
 
     const handleAddToWishList = (id) => {
         fetch(`http://localhost:5000/wishlistProduct/${id}`, {
@@ -42,7 +42,7 @@ const ProductDetails = () => {
             .then(res => res.json())
             .then(res => {
                 if (res.acknowledged) {
-                    successToast('Product Added to wishlist!')
+                    successToast('Product Added to the wishlist!')
                     refetch()
                 }
             })
@@ -106,7 +106,7 @@ const ProductDetails = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='col-md-4 mt-md-0 mt-5 animate__animated animate__backInRight'>
+                                <div className='col-md-4 mt-md-0 mt-5 animate__animated animate__backInRight sticky-top'>
                                     <div>
                                         <div className="d-flex align-items-center mb-3 justify-content-between">
                                             <span > <FaShareSquare className='text-secondary'></FaShareSquare> Share</span>
@@ -121,7 +121,7 @@ const ProductDetails = () => {
                                             {!isAdmin && !isSeller &&
                                                 user &&
                                                 bookedProduct?.productId === product._id ?
-                                                <Button variant='secondary'>Already Booked</Button>
+                                                <Button variant='secondary'>Booked</Button>
                                                 :
                                                 user &&
                                                 <Button variant="primary" onClick={handleShow}>
@@ -141,7 +141,7 @@ const ProductDetails = () => {
                                                             }</h5>
                                                         <p className="my-1 opacity-75">{product.sellerEmail}</p>
                                                     </div>
-                                                    <small className="opacity-80  text-primary"><a className='nav-link' href={`tel:${product.sellerPhone}`}><FaPhoneAlt></FaPhoneAlt> Call Now</a></small>
+                                                    <a className='nav-link text-primary' href={`tel:${product.sellerPhone}`}><FaPhoneAlt></FaPhoneAlt> <small className='d-none d-lg-block'>call now</small></a>
                                                 </div>
                                             </div>
                                         </div>
