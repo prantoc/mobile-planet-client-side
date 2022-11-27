@@ -1,25 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { Table } from 'react-bootstrap';
+import { Badge, Image, Table } from 'react-bootstrap';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 import Loading from '../../../Shared/Loading/Loading';
-
+import moment from 'moment';
 const Buyers = () => {
     const { user } = useContext(AuthContext);
-    const url = `http://localhost:5000/users?email=${user.email}`
-    const { data: users, isLoading } = useQuery({
-        queryKey: ['users'],
-        queryFn: () => fetch(url, {
+    const { data: buyers, isLoading } = useQuery({
+        queryKey: ['buyers', user?.email],
+        queryFn: () => fetch(`http://localhost:5000/buyersList?email=${user?.email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
         }).then(res => res.json())
 
     })
-
-
-
-
 
     if (isLoading) {
         return <Loading></Loading>
@@ -32,21 +27,45 @@ const Buyers = () => {
                     <thead className='text-center'>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>Product Name</th>
+                            <th>Product Image</th>
+                            <th>Product Price</th>
+                            <th>Buyer Name</th>
+                            <th>Buyer Email</th>
+                            <th>Buyer Number</th>
+                            <th>Meeting Location</th>
+                            <th>Payment Status</th>
+                            <th>Created At</th>
                         </tr>
                     </thead>
                     <tbody>
                         {isLoading ?
                             <Loading></Loading>
                             :
-                            users.length > 0 ?
-                                users?.map((user, i) =>
+                            buyers.length > 0 ?
+                                buyers?.map((buyer, i) =>
                                     <tr key={i} className="align-content-center text-center">
                                         <td>{i + 1}</td>
 
-                                        <td>{user.name}</td>
-                                        <td>{user.email}</td>
+                                        <td>{buyer.productName}</td>
+                                        <td>
+                                            <Image style={{ height: '48px' }} src={buyer.productImage} />
+                                        </td>
+                                        <td>{buyer.resellPrice}</td>
+                                        <td>{buyer.buyerName}</td>
+                                        <td>{buyer.buyerEmail}</td>
+                                        <td>{buyer.buyerNumber}</td>
+                                        <td>{buyer.meetingLocation}</td>
+                                        <td>
+                                            {
+                                                buyer.paid === true ?
+                                                    <Badge bg='success'>PAID</Badge>
+                                                    :
+                                                    <Badge bg='warning'>UNPAID</Badge>
+
+                                            }
+                                        </td>
+                                        <td>{moment(buyer.createdAt,).startOf('hour').fromNow()}</td>
                                     </tr>
                                 )
                                 :
