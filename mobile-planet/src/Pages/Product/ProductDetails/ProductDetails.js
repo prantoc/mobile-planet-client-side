@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
@@ -12,6 +12,7 @@ import { useAdmin } from '../../../hooks/useAdmin';
 import { useSeller } from '../../../hooks/useSeller';
 import { useQuery } from '@tanstack/react-query';
 import { successToast } from '../../../toast/Toaster';
+import axios from 'axios';
 const ProductDetails = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
@@ -21,18 +22,31 @@ const ProductDetails = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const navigation = useNavigation()
-    const { data: bookedProduct = {}, isLoading, refetch } = useQuery({
+    const { data: bookedProduct, isLoading, refetch } = useQuery({
         queryKey: ['booked-product', user?.email, product?._id],
         queryFn: () => fetch(`http://localhost:5000/bookedProduct?email=${user?.email}&id=${product?._id}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
         }).then(res => res.json())
-
     })
-    console.log(bookedProduct);
+    const [wishlist, setWishlist] = useState('');
+    // const [wishAdd, setWishAdd] = useState(false);
 
-    const handleAddToWishList = (id) => {
+    useEffect(() => {
+        const config = {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('mobile-planet')}`
+            }
+        }
+        axios.get(`http://localhost:5000/wishlistProduct?id=${product?._id}`, config)
+            .then(res => {
+                setWishlist(res.data)
+            })
+    }, [product?._id, setWishlist, wishlist])
+
+
+    const handleAddToWishList = (id, mgs) => {
         fetch(`http://localhost:5000/wishlistProduct/${id}`, {
             method: 'put',
             headers: {
@@ -42,7 +56,8 @@ const ProductDetails = () => {
             .then(res => res.json())
             .then(res => {
                 if (res.acknowledged) {
-                    successToast('Product Added to the wishlist!')
+                    successToast(mgs)
+                    setWishlist(!wishlist)
                     refetch()
                 }
             })
@@ -112,7 +127,7 @@ const ProductDetails = () => {
                                             <span > <FaShareSquare className='text-secondary'></FaShareSquare> Share</span>
                                             {
                                                 !isAdmin && !isSeller && user &&
-                                                <span role="button" className={bookedProduct?.wishlist === true ? 'text-primary' : 'text-secondary'} onClick={() => handleAddToWishList(product._id)}>
+                                                <span role="button" className={wishlist?.wishlist === true ? 'text-primary' : 'text-secondary'} onClick={() => handleAddToWishList(product._id, wishlist?.wishlist === true ? 'Product remove to the wishlist!' : 'Product added to the wishlist!')}>
                                                     <FaHeart className='me-1' />
                                                     Wishlist
                                                 </span>
