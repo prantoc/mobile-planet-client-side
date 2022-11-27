@@ -4,6 +4,7 @@ import FrontendLayout from "../../Layout/FrontendLayout";
 import Login from "../../Pages/Auth/Login/Login";
 import SignUp from "../../Pages/Auth/SignUp/SignUp";
 import Blog from "../../Pages/Blog/Blog";
+import ReviewItems from "../../Pages/Buyer/ReviewItems/ReviewItems";
 import Category from "../../Pages/Dashboard/Category/Category/Category";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Product from "../../Pages/Dashboard/Product/Product/Product";
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
             {
                 path: "/blog",
                 element: <Blog></Blog>
+            },
+            {
+                path: "/booked-items",
+                element: <ReviewItems></ReviewItems>
             },
             {
                 path: "/login",
