@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigation } from 'react-router-dom';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 import Loading from '../../Shared/Loading/Loading';
 import moment from 'moment';
 import { FaCheckCircle, FaHeart, FaMapMarkerAlt, FaPhoneAlt, FaShareSquare, FaShoppingCart } from 'react-icons/fa';
@@ -25,10 +26,10 @@ const ProductDetails = () => {
         <>
             <Container className='py-4'>
                 <Row>
-                    <Col lg={12} className="animate__animated animate__backInLeft mx-auto">
+                    <Col lg={12} className=" mx-auto">
                         <div className="card mb-3 shadow-lg p-3 bg-body rounded border-0 mx-auto" >
                             <div className="row g-0">
-                                <div className='col-md-8 px-5'>
+                                <div className='col-md-8 px-5 animate__animated animate__backInLeft'>
                                     <div>
                                         <div className="d-flex align-items-center mb-2">
                                             <h4 className="card-title me-3">{product.productName}</h4>
@@ -40,7 +41,12 @@ const ProductDetails = () => {
                                         </div>
                                         <div className="card-body">
                                             <div>
-                                                <img className="img-fluid rounded-start h-100" src={product.productImage} alt="" />
+
+                                                <PhotoProvider>
+                                                    <PhotoView src={product.productImage}>
+                                                        <img role='button' className="img-fluid rounded-start h-100" src={product.productImage} alt="" />
+                                                    </PhotoView>
+                                                </PhotoProvider>
                                                 <h1 className='fw-bold mt-2' style={{ color: "#00a0ff" }}>${product.resellPrice}</h1>
 
                                                 <div className='row mb-5'>
@@ -68,7 +74,7 @@ const ProductDetails = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='col-md-4 mt-md-0 mt-5'>
+                                <div className='col-md-4 mt-md-0 mt-5 animate__animated animate__backInRight'>
                                     <div>
                                         <div className="d-flex align-items-center mb-3 justify-content-between">
                                             <span> <FaShareSquare></FaShareSquare> Share</span>

@@ -6,12 +6,12 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 const ProductCard = ({ product }) => {
     return (
         <>
-            <Col lg={6} className="animate__animated animate__backInLeft">
+            <Col lg={6} className="animate__animated animate__backInLeft mx-auto mb-2">
                 <Link to={`/product-details/${product._id}`} className='nav-link'>
                     <div className="card mb-3 shadow-sm px-3 bg-body rounded border-0 mx-auto advertise-card" >
                         <div className="row g-0">
-                            <div className="col-md-4">
-                                <img className="img-fluid rounded-start h-100" src={product.productImage} alt="" />
+                            <div className="col-md-4 py-2">
+                                <img className="rounded-start h-100 product-card-img" src={product.productImage} alt="" />
                             </div>
                             <div className="col-md-8">
                                 <div className="card-body">
@@ -31,7 +31,6 @@ const ProductCard = ({ product }) => {
                             </div>
                         </div>
                     </div>
-
                 </Link>
             </Col>
         </>

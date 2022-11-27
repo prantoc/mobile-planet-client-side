@@ -18,7 +18,7 @@ const Categories = () => {
                     {isLoading ?
                         <Loading></Loading>
                         :
-                        categories.length > 0 && categories?.map(cat => <CategoryCard key={cat._id} category={cat}></CategoryCard>)
+                        categories?.length > 0 && categories?.map(cat => <CategoryCard key={cat._id} category={cat}></CategoryCard>)
 
                     }
                 </Row>

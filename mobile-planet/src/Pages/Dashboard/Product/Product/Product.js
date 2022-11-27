@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import moment from 'moment';
 import React, { useContext, useState } from 'react';
-import { Button, Image, Table } from 'react-bootstrap';
+import { Badge, Button, Image, Table } from 'react-bootstrap';
 import { FaPlus, FaQuestion, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 import { useAdmin } from '../../../../hooks/useAdmin';
@@ -149,16 +149,19 @@ const Product = () => {
                                         <td>{moment(product.createdAt, "YYYYMMDD").format('MMMM Do YYYY')}</td>
                                         <td>
                                             {
-                                                isAdmin ?
-                                                    <Button variant={product.advertise === false ? 'warning' : product.advertise === true ? 'success disabled' : 'primary'}
-                                                        onClick={() => handleAdvertiseProduct(product._id)}>
+                                                product.displayListing === true ?
+                                                    isAdmin ?
+                                                        <Button variant={product.advertise === false ? 'warning' : product.advertise === true ? 'success disabled' : 'primary'}
+                                                            onClick={() => handleAdvertiseProduct(product._id)}>
 
-                                                        {product.advertise === false ? 'Pending' : product.advertise === true ? 'Advertised' : 'Advertise'}
-                                                    </Button>
+                                                            {product.advertise === false ? 'Pending' : product.advertise === true ? 'Advertised' : 'Advertise'}
+                                                        </Button>
+                                                        :
+                                                        <Button variant={product.advertise === false ? 'warning disabled' : product.advertise === true ? 'success disabled' : 'primary'} onClick={() => handleAdvertiseProduct(product._id)}>
+                                                            {product.advertise === false ? 'Pending' : product.advertise === true ? 'Advertised' : 'Advertise'}
+                                                        </Button>
                                                     :
-                                                    <Button variant={product.advertise === false ? 'warning disabled' : product.advertise === true ? 'success disabled' : 'primary'} onClick={() => handleAdvertiseProduct(product._id)}>
-                                                        {product.advertise === false ? 'Pending' : product.advertise === true ? 'Advertised' : 'Advertise'}
-                                                    </Button>
+                                                    <Badge>Make display first</Badge>
 
                                             }
 
