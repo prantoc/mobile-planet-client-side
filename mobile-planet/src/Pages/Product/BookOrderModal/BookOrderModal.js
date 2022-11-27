@@ -14,7 +14,7 @@ const BookOrderModal = ({ user, handleClose, setShow, show, product, refetch }) 
         const { _id, productName, resellPrice, productImage, sellerEmail } = product
         const { location, buyerNumber } = data
         const bookOrder = {
-            productId: _id, productName, productImage, resellPrice, buyerName: user?.displayName, buyerEmail: user?.email, buyerNumber: buyerNumber, meetingLocation: location, sellerEmail, createdAt: today, paid: false
+            productId: _id, productName, productImage, resellPrice, buyerName: user?.displayName, buyerEmail: user?.email, buyerNumber: buyerNumber, meetingLocation: location, sellerEmail, createdAt: today, wishlist: false, paid: false
         }
 
         const config = {

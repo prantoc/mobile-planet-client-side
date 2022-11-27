@@ -11,6 +11,7 @@ import BookOrderModal from '../BookOrderModal/BookOrderModal';
 import { useAdmin } from '../../../hooks/useAdmin';
 import { useSeller } from '../../../hooks/useSeller';
 import { useQuery } from '@tanstack/react-query';
+import { successToast } from '../../../toast/Toaster';
 const ProductDetails = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
@@ -31,7 +32,24 @@ const ProductDetails = () => {
     })
 
 
-    if (navigation.state === "loading") {
+    const handleAddToWishList = (id) => {
+        fetch(`http://localhost:5000/wishlistProduct/${id}`, {
+            method: 'put',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('mobile-planet')}`
+            }
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res.acknowledged) {
+                    successToast('Product Added to wishlist!')
+                    refetch()
+                }
+            })
+    }
+
+
+    if (navigation.state === "loading" || isLoading) {
         return <Loading></Loading>
     }
     return (
@@ -94,23 +112,21 @@ const ProductDetails = () => {
                                             <span > <FaShareSquare className='text-secondary'></FaShareSquare> Share</span>
                                             {
                                                 !isAdmin && !isSeller && user &&
-                                                <span role="button">
-                                                    <FaHeart className='text-secondary me-1' />
+                                                <span role="button" className={bookedProduct?.wishlist === true ? 'text-primary' : 'text-secondary'} onClick={() => handleAddToWishList(product._id)}>
+                                                    <FaHeart className='me-1' />
                                                     Wishlist
                                                 </span>
 
                                             }
                                             {!isAdmin && !isSeller &&
-                                                isLoading && user ?
-                                                <Loading></Loading>
-                                                :
+                                                user &&
                                                 bookedProduct?.productId === product._id ?
-                                                    <Button variant='secondary'>Already Booked</Button>
-                                                    :
-                                                    user &&
-                                                    <Button variant="primary" onClick={handleShow}>
-                                                        Book Now <FaShoppingCart></FaShoppingCart>
-                                                    </Button>
+                                                <Button variant='secondary'>Already Booked</Button>
+                                                :
+                                                user &&
+                                                <Button variant="primary" onClick={handleShow}>
+                                                    Book Now <FaShoppingCart></FaShoppingCart>
+                                                </Button>
                                             }
                                         </div>
                                         <div className="list-group w-auto">
