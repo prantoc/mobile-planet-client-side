@@ -10,6 +10,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import BookOrderModal from '../BookOrderModal/BookOrderModal';
 import { useAdmin } from '../../../hooks/useAdmin';
 import { useSeller } from '../../../hooks/useSeller';
+import { useQuery } from '@tanstack/react-query';
 const ProductDetails = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
@@ -19,6 +20,17 @@ const ProductDetails = () => {
     const handleShow = () => setShow(true);
     const product = useLoaderData();
     const navigation = useNavigation()
+    const { data: bookedProduct, isLoading, refetch } = useQuery({
+        queryKey: ['bookedProduct', user?.email, product?._id],
+        queryFn: () => fetch(`http://localhost:5000/bookedProduct?email=${user?.email}&id=${product?._id}`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('mobile-planet')}`
+            }
+        }).then(res => res.json())
+
+    })
+
+
     if (navigation.state === "loading") {
         return <Loading></Loading>
     }
@@ -33,7 +45,9 @@ const ProductDetails = () => {
                                     <div>
                                         <div className="d-flex align-items-center mb-2">
                                             <h4 className="card-title me-3">{product.productName}</h4>
-                                            <Badge bg="primary">Advertised</Badge>
+
+                                            {product.advertise === true &&
+                                                <Badge bg="primary">Advertised</Badge>}
                                         </div>
                                         <div>
                                             <span className='mb-2 d-block'><FaMapMarkerAlt></FaMapMarkerAlt> {product.location}</span>
@@ -78,10 +92,19 @@ const ProductDetails = () => {
                                     <div>
                                         <div className="d-flex align-items-center mb-3 justify-content-between">
                                             <span> <FaShareSquare></FaShareSquare> Share</span>
-                                            {!isAdmin && !isSeller && <span role="button"><FaHeart></FaHeart> Wishlist</span>}
-                                            {!isAdmin && !isSeller && <Button variant="primary" onClick={handleShow}>
-                                                Book Now <FaShoppingCart></FaShoppingCart>
-                                            </Button>}
+                                            {!isAdmin && !isSeller && user && <span role="button"><FaHeart></FaHeart> Wishlist</span>}
+                                            {!isAdmin && !isSeller &&
+                                                isLoading && user ?
+                                                <Loading></Loading>
+                                                :
+                                                bookedProduct?.productId === product._id ?
+                                                    <Button variant='secondary'>Already Booked</Button>
+                                                    :
+                                                    user &&
+                                                    <Button variant="primary" onClick={handleShow}>
+                                                        Book Now <FaShoppingCart></FaShoppingCart>
+                                                    </Button>
+                                            }
                                         </div>
                                         <div className="list-group w-auto">
                                             <div className="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
@@ -141,7 +164,7 @@ const ProductDetails = () => {
                 </Row>
             </Container>
 
-            <BookOrderModal user={user} handleClose={handleClose} setShow={setShow} show={show} product={product}></BookOrderModal>
+            <BookOrderModal refetch={refetch} user={user} handleClose={handleClose} setShow={setShow} show={show} product={product}></BookOrderModal>
 
         </>
     );

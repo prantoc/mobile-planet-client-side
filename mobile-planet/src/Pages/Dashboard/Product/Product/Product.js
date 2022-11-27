@@ -185,7 +185,7 @@ const Product = () => {
                                     </tr>
                                 )
                                 :
-                                <tr >
+                                <tr>
                                     <td colSpan="12" className="text-center">
                                         <h2 className='btn btn-danger col-4'>No Data Found !</h2>
                                     </td>

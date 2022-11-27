@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { FaShoppingCart } from 'react-icons/fa';
 import { successToast } from '../../../toast/Toaster';
 
-const BookOrderModal = ({ user, handleClose, setShow, show, product }) => {
+const BookOrderModal = ({ user, handleClose, setShow, show, product, refetch }) => {
     const [load, setLoad] = useState(false);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const handleAddProduct = data => {
@@ -29,6 +29,7 @@ const BookOrderModal = ({ user, handleClose, setShow, show, product }) => {
                 if (res.data.acknowledged) {
                     setShow(false)
                     successToast('You booked a product successfully!')
+                    refetch()
                     setLoad(false)
                     reset()
                 }
