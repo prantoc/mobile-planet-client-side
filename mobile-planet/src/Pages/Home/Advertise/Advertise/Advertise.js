@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 
 import ProductCard from '../../../Product/ProductCard/ProductCard';
+import Loading from '../../../Shared/Loading/Loading';
 const Advertise = () => {
     const { data: products, isLoading } = useQuery({
         queryKey: ['product'],
@@ -19,7 +20,11 @@ const Advertise = () => {
                     <h1 className='text-center py-5 fw-bold'>ADVERTISE PRODUCT</h1>
                     <Row>
                         {
-                            products?.map(p => <ProductCard key={p._id} product={p}></ProductCard>)
+                            isLoading ?
+                                <Loading></Loading>
+
+                                :
+                                products?.map(p => <ProductCard key={p._id} product={p}></ProductCard>)
                         }
 
                     </Row>
