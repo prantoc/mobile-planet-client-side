@@ -91,8 +91,15 @@ const ProductDetails = () => {
                                 <div className='col-md-4 mt-md-0 mt-5 animate__animated animate__backInRight'>
                                     <div>
                                         <div className="d-flex align-items-center mb-3 justify-content-between">
-                                            <span> <FaShareSquare></FaShareSquare> Share</span>
-                                            {!isAdmin && !isSeller && user && <span role="button"><FaHeart></FaHeart> Wishlist</span>}
+                                            <span > <FaShareSquare className='text-secondary'></FaShareSquare> Share</span>
+                                            {
+                                                !isAdmin && !isSeller && user &&
+                                                <span role="button">
+                                                    <FaHeart className='text-secondary me-1' />
+                                                    Wishlist
+                                                </span>
+
+                                            }
                                             {!isAdmin && !isSeller &&
                                                 isLoading && user ?
                                                 <Loading></Loading>
