@@ -5,10 +5,22 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 import moment from 'moment';
 import axios from 'axios';
+import PaymentModal from '../../Payment/PaymentModal/PaymentModal';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
+
 const ReviewItems = () => {
     const { user } = useContext(AuthContext);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const [bookedProducts, setBookedProducts] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [bookedProduct, setBookedProduct] = useState('');
+
     useEffect(() => {
         setIsLoading(true)
         const config = {
@@ -46,7 +58,7 @@ const ReviewItems = () => {
                                                         <p className="text-muted mb-0"> Place On <span className="fw-bold text-body">{moment(bkp.createdAt,).format('D,MMMM YYYY')}</span> </p>
                                                     </div>
                                                     <div>
-                                                        <Button>Pay</Button>
+                                                        {bkp.paid === true ? <span className='text-success fw-bold fs-5'>PAID</span> : <Button className='btn-sm' onClick={() => { setBookedProduct(bkp); handleShow() }}>Pay</Button>}
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,6 +93,10 @@ const ReviewItems = () => {
                     }
                 </div>
             </div>
+
+            {show === true && <Elements stripe={stripePromise}>
+                <PaymentModal bookedProduct={bookedProduct} setShow={setShow} show={show} handleClose={handleClose}></PaymentModal>
+            </Elements>}
         </>
     );
 };

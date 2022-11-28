@@ -17,8 +17,6 @@ const WishlistItems = () => {
 
     })
 
-    console.log(wishlists);
-
 
     const handleRemoveToWishList = (id) => {
         fetch(`http://localhost:5000/wishlistProduct/${id}`, {
