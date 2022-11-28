@@ -38,8 +38,8 @@ const WishlistItems = () => {
         <>
             <Container>
                 <Row>
-                    <Col md={7}>
-                        <div className="list-group w-auto mt-4 card">
+                    <Col md={12}>
+                        <div className="list-group w-auto mt-4 card mx-auto">
                             {
                                 isLoading ?
                                     <Loading></Loading>
@@ -72,8 +72,8 @@ const WishlistItems = () => {
                             }
                         </div>
                     </Col>
-                    <Col md={5}>
-                        {/* <div key={bkp._id} className="col-md-6 col-lg-4 col-xl-4 mb-5">
+                    {/* <Col md={5}>
+                        <div key={bkp._id} className="col-md-6 col-lg-4 col-xl-4 mb-5">
                             <div className="card card-stepper" style={{ borderRadius: '16px' }}>
                                 <div className="card-header p-4">
                                     <div className="d-flex justify-content-between align-items-center">
@@ -108,8 +108,8 @@ const WishlistItems = () => {
                                     </ul>
                                 </div>
                             </div>
-                        </div> */}
-                    </Col>
+                        </div>
+                    </Col> */}
                 </Row>
             </Container>
         </>
