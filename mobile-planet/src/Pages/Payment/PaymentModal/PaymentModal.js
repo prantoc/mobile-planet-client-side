@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { successToast } from '../../../toast/Toaster';
 
-const PaymentModal = ({ show, handleClose, bookedProduct, setShow }) => {
-    const { _id, resellPrice, buyerName, buyerEmail } = bookedProduct
+const PaymentModal = ({ show, handleClose, bookedProduct, setShow, refetch }) => {
+    const { _id, resellPrice, productId, buyerName, buyerEmail } = bookedProduct
 
     const stripe = useStripe();
     const elements = useElements();
@@ -91,7 +91,8 @@ const PaymentModal = ({ show, handleClose, bookedProduct, setShow }) => {
                 resellPrice,
                 transactionId: paymentIntent.id,
                 buyerEmail,
-                productId: _id,
+                id: _id,
+                productId
             }
 
             fetch(`http://localhost:5000/payments`, {
@@ -106,7 +107,8 @@ const PaymentModal = ({ show, handleClose, bookedProduct, setShow }) => {
                 .then(data => {
                     if (data.acknowledged) {
                         setLoading(false)
-                        setShow()
+                        setShow(false)
+                        refetch()
                         successToast('Your Payment has been completed successfully!')
                     }
                 })

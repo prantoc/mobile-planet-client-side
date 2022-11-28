@@ -34,10 +34,6 @@ const WishlistItems = () => {
             })
     }
 
-
-
-
-
     return (
         <>
             <Container>
@@ -61,12 +57,16 @@ const WishlistItems = () => {
                                                     </div>
                                                     <small className="text-danger ">
                                                         <FaTrash onClick={() => handleRemoveToWishList(wl._id)}></FaTrash>
+
+                                                        <div>
+                                                            {wl.paid === true && <span className='text-success fw-bold fs-5'>PAID</span>}
+                                                        </div>
                                                     </small>
                                                 </div>
                                             </div>
                                         )
                                         :
-                                        <div className="text-center">
+                                        <div className="text-center py-5">
                                             <h2 className='btn btn-danger col-4'>No Data Found !</h2>
                                         </div>
                             }

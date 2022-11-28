@@ -1,13 +1,13 @@
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 import moment from 'moment';
-import axios from 'axios';
 import PaymentModal from '../../Payment/PaymentModal/PaymentModal';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import { useQuery } from '@tanstack/react-query';
 
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
@@ -17,23 +17,39 @@ const ReviewItems = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [bookedProducts, setBookedProducts] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    // const [bookedProducts, setBookedProducts] = useState('');
+    // const [isLoading, setIsLoading] = useState(false);
     const [bookedProduct, setBookedProduct] = useState('');
 
-    useEffect(() => {
-        setIsLoading(true)
-        const config = {
+    // useEffect(() => {
+    //     setIsLoading(true)
+    //     const config = {
+    //         headers: {
+    //             authorization: `bearer ${localStorage.getItem('mobile-planet')}`
+    //         }
+    //     }
+    //     axios.get(`http://localhost:5000/bookedProducts?email=${user?.email}`, config)
+    //         .then(res => {
+    //             setBookedProducts(res.data)
+    //             setIsLoading(false)
+    //         })
+    // }, [user?.email, setBookedProducts])
+
+
+    const { data: bookedProducts = [], isLoading, refetch } = useQuery({
+        queryKey: ['wishlistedProducts', user?.email],
+        queryFn: () => fetch(`http://localhost:5000/bookedProducts?email=${user?.email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
-        }
-        axios.get(`http://localhost:5000/bookedProducts?email=${user?.email}`, config)
-            .then(res => {
-                setBookedProducts(res.data)
-                setIsLoading(false)
-            })
-    }, [user?.email, setBookedProducts])
+        }).then(res => res.json())
+
+    })
+
+
+
+
+
 
     if (isLoading) {
         return <Loading></Loading>
@@ -72,7 +88,7 @@ const ReviewItems = () => {
                                                     </div>
                                                     <div>
                                                         <img
-                                                            src={bkp.productImage} width="150" alt="" className="align-self-center rounded-start" />
+                                                            src={bkp.productImage} width="150" height="150" alt="" className="align-self-center rounded-start" />
                                                     </div>
                                                 </div>
                                                 <ul id="progressbar-1" className="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
@@ -95,7 +111,7 @@ const ReviewItems = () => {
             </div>
 
             {show === true && <Elements stripe={stripePromise}>
-                <PaymentModal bookedProduct={bookedProduct} setShow={setShow} show={show} handleClose={handleClose}></PaymentModal>
+                <PaymentModal refetch={refetch} bookedProduct={bookedProduct} setShow={setShow} show={show} handleClose={handleClose}></PaymentModal>
             </Elements>}
         </>
     );
