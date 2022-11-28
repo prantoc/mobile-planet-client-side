@@ -3,8 +3,10 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link, useRouteError } from 'react-router-dom';
 import errorGif from '../../../assets/error/error-404.gif'
+import useTitle from '../../../hooks/useTitle';
 const Error = () => {
     const error = useRouteError()
+    useTitle('Error')
     return (
         <Container>
             <Row>

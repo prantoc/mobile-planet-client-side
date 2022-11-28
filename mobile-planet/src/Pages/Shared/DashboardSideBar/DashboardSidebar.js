@@ -15,11 +15,11 @@ const DashboardSidebar = () => {
 
                 <div className="position-sticky pt-5 sidebar-sticky">
                     <ul className="nav flex-column">
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             {isAdmin && <Link to="/dashboard" className="nav-link" aria-current="page">
                                 <FaHome></FaHome> Dashboard
                             </Link>}
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             {isAdmin && <Link to="/dashboard/category" className="nav-link" aria-current="page">
                                 <FaNotesMedical></FaNotesMedical> Category

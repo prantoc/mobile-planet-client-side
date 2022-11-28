@@ -5,8 +5,10 @@ import Loading from '../../Shared/Loading/Loading';
 import moment from 'moment';
 import { FaTrash } from 'react-icons/fa';
 import { successToast } from '../../../toast/Toaster';
+import useTitle from '../../../hooks/useTitle';
+import { Link } from 'react-router-dom';
 const WishlistItems = () => {
-
+    useTitle('Wishlist')
     const { data: wishlists = [], isLoading, refetch } = useQuery({
         queryKey: ['wishlistedProducts'],
         queryFn: () => fetch(`http://localhost:5000/wishlistedProducts`, {
@@ -19,8 +21,8 @@ const WishlistItems = () => {
 
 
     const handleRemoveToWishList = (id) => {
-        fetch(`http://localhost:5000/wishlistProduct/${id}`, {
-            method: 'put',
+        fetch(`http://localhost:5000/removeWishlistProduct/${id}`, {
+            method: 'get',
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
@@ -33,6 +35,9 @@ const WishlistItems = () => {
                 }
             })
     }
+
+
+
 
     return (
         <>
@@ -50,17 +55,32 @@ const WishlistItems = () => {
                                             <div key={wl._id} className="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" role='button'>
                                                 <img src={wl.productImg} alt="" width="100" height="80" className="flex-shrink-0" />
                                                 <div className="d-flex gap-2 w-100 justify-content-between align-items-center">
-                                                    <div>
-                                                        <h5 className="mb-0">{wl.productName}</h5>
-                                                        <p className="mb-0 opacity-75">Price: ${wl.productPrice}</p>
-                                                        <p className="mb-0 opacity-75">Added: {moment(wl.createdAt,).format('D,MMMM YYYY')}</p>
-                                                    </div>
+                                                    {wl.paid === true ?
+                                                        <div className={`nav-link ${wl.paid === true && 'text-success'}`}>
+                                                            <div>
+                                                                <h5 className="mb-0">
+                                                                    {wl.productName}
+                                                                </h5>
+                                                                <p className="mb-0 opacity-75">Price: ${wl.productPrice}</p>
+                                                                <p className="mb-0 opacity-75">Added: {moment(wl.createdAt,).format('D,MMMM YYYY')}</p>
+                                                            </div>
+                                                        </div>
+
+                                                        :
+                                                        <Link to={`/product-details/${wl.productId}`} className={`nav-link ${wl.paid === true && 'text-success'}`}>
+                                                            <div>
+                                                                <h5 className="mb-0">
+                                                                    {wl.productName}
+                                                                </h5>
+                                                                <p className="mb-0 opacity-75">Price: ${wl.productPrice}</p>
+                                                                <p className="mb-0 opacity-75">Added: {moment(wl.createdAt,).format('D,MMMM YYYY')}</p>
+                                                            </div>
+                                                        </Link>
+
+                                                    }
+                                                    {wl.paid === true && <span className='text-success fw-bold fs-5'>PAID</span>}
                                                     <small className="text-danger ">
                                                         <FaTrash onClick={() => handleRemoveToWishList(wl._id)}></FaTrash>
-
-                                                        <div>
-                                                            {wl.paid === true && <span className='text-success fw-bold fs-5'>PAID</span>}
-                                                        </div>
                                                     </small>
                                                 </div>
                                             </div>

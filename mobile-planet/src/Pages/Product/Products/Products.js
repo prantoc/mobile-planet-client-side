@@ -1,11 +1,13 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigation } from 'react-router-dom';
+import useTitle from '../../../hooks/useTitle';
 import Loading from '../../Shared/Loading/Loading';
 import ProductCard from '../ProductCard/ProductCard';
 import Sidebar from '../Sidebar/Sidebar';
 
 const Products = () => {
+    useTitle('Products')
     const products = useLoaderData();
     const navigation = useNavigation()
     if (navigation.state === "loading") {

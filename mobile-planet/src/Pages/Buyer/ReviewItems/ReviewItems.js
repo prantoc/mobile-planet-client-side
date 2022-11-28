@@ -8,11 +8,13 @@ import PaymentModal from '../../Payment/PaymentModal/PaymentModal';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { useQuery } from '@tanstack/react-query';
+import useTitle from '../../../hooks/useTitle';
 
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const ReviewItems = () => {
+    useTitle('Booked Items')
     const { user } = useContext(AuthContext);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);

@@ -4,10 +4,12 @@ import React, { useContext } from 'react';
 import { Badge, Button, Table } from 'react-bootstrap';
 import { FaCheckCircle, FaQuestion } from 'react-icons/fa';
 import { AuthContext } from '../../../../contexts/AuthProvider';
+import useTitle from '../../../../hooks/useTitle';
 import { approveItemAlret, approveSwlFire, deleteItemAlret, swlFire } from '../../../../toast/Toaster';
 import Loading from '../../../Shared/Loading/Loading';
 
 const Users = () => {
+    useTitle('Dashboard-Users')
     const { user } = useContext(AuthContext);
     const url = `http://localhost:5000/users?email=${user.email}`
     const { data: users, isLoading, refetch } = useQuery({

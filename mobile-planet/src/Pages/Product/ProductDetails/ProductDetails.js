@@ -13,6 +13,7 @@ import { useSeller } from '../../../hooks/useSeller';
 import { useQuery } from '@tanstack/react-query';
 import { successToast } from '../../../toast/Toaster';
 import axios from 'axios';
+import useTitle from '../../../hooks/useTitle';
 const ProductDetails = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
@@ -22,6 +23,8 @@ const ProductDetails = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const navigation = useNavigation()
+    useTitle(product.productName)
+
     const { data: bookedProduct, isLoading, refetch } = useQuery({
         queryKey: ['booked-product', user?.email, product?._id],
         queryFn: () => fetch(`http://localhost:5000/bookedProduct?email=${user?.email}&id=${product?._id}`, {

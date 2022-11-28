@@ -9,7 +9,9 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { errorToast, successToast } from '../../../toast/Toaster';
 import { useToken } from '../../../hooks/useToken';
+import useTitle from '../../../hooks/useTitle';
 const Login = () => {
+    useTitle('Login')
     const { userSignIn, loading, setLoading, signInByGoogle } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [loggedInUserEmail, setLoggedInUserEmail] = useState('')

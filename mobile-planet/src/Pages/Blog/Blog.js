@@ -1,7 +1,9 @@
 import React from 'react';
 import { Col, Container, Row, Card } from 'react-bootstrap';
+import useTitle from '../../hooks/useTitle';
 
 const Blog = () => {
+    useTitle('Blog')
     return (
         <div>
             <Container className='my-5'>

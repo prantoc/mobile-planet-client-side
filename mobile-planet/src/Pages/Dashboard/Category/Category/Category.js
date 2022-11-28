@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 import { Button, Image, Modal, Table } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
+import useTitle from '../../../../hooks/useTitle';
 import { deleteItemAlret, successToast, swlFire } from '../../../../toast/Toaster';
 import Loading from '../../../Shared/Loading/Loading';
 
 const Category = () => {
+    useTitle('Dashboard-Category')
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

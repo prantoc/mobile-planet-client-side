@@ -4,7 +4,9 @@ import { Badge, Image, Table } from 'react-bootstrap';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 import Loading from '../../../Shared/Loading/Loading';
 import moment from 'moment';
+import useTitle from '../../../../hooks/useTitle';
 const Buyers = () => {
+    useTitle('Dashboard-Buyers')
     const { user } = useContext(AuthContext);
     const { data: buyers, isLoading } = useQuery({
         queryKey: ['buyers', user?.email],

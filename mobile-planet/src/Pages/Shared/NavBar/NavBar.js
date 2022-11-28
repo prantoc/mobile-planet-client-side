@@ -54,7 +54,7 @@ const NavBar = () => {
                             {
                                 user
                                 &&
-                                <LinkContainer to={isAdmin ? '/dashboard' : isSeller ? '/dashboard/seller/product' : '/booked-items'}>
+                                <LinkContainer to={isAdmin ? '/dashboard/category' : isSeller ? '/dashboard/seller/product' : '/booked-items'}>
                                     <Nav.Link >{isAdmin ? 'Dashboard' : isSeller ? 'Dashboard' : 'Booked Items'}</Nav.Link>
                                 </LinkContainer>
                             }

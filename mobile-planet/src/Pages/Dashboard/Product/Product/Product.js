@@ -6,11 +6,13 @@ import { Badge, Button, Image, Table } from 'react-bootstrap';
 import { FaPlus, FaQuestion, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 import { useAdmin } from '../../../../hooks/useAdmin';
+import useTitle from '../../../../hooks/useTitle';
 import { approveItemAlret, approveSwlFire, deleteItemAlret, swlFire } from '../../../../toast/Toaster';
 import Loading from '../../../Shared/Loading/Loading';
 import ProductModal from '../ProductModal/ProductModal';
 
 const Product = () => {
+    useTitle('Dashboard-Product')
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
     const [show, setShow] = useState(false);
