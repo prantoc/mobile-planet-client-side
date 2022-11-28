@@ -47,7 +47,7 @@ const ProductDetails = () => {
 
 
     const handleAddToWishList = (id, mgs) => {
-        fetch(`http://localhost:5000/wishlistProduct/${id}`, {
+        fetch(`http://localhost:5000/wishlistProduct?id=${id}&name=${product.productName}&img=${product.productImage}&price=${product.resellPrice}`, {
             method: 'put',
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
