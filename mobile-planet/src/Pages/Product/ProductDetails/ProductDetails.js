@@ -34,7 +34,7 @@ const ProductDetails = () => {
         }).then(res => res.json())
     })
     const [wishlist, setWishlist] = useState('');
-    // const [wishAdd, setWishAdd] = useState(false);
+    const [addWish, setAddWish] = useState(true);
 
     useEffect(() => {
         const config = {
@@ -46,11 +46,13 @@ const ProductDetails = () => {
             .then(res => {
                 setWishlist(res.data)
             })
-    }, [product?._id, setWishlist, wishlist])
+
+    }, [product?._id, addWish])
 
 
     const handleAddToWishList = (id, mgs) => {
-        fetch(`http://localhost:5000/wishlistProduct?id=${id}&name=${product.productName}&img=${product.productImage}&price=${product.resellPrice}`, {
+        setAddWish(!addWish)
+        fetch(`http://localhost:5000/addToWishlistProduct?id=${id}&name=${product.productName}&img=${product.productImage}&price=${product.resellPrice}`, {
             method: 'put',
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
@@ -60,7 +62,6 @@ const ProductDetails = () => {
             .then(res => {
                 if (res.acknowledged) {
                     successToast(mgs)
-                    setWishlist(!wishlist)
                     refetch()
                 }
             })
@@ -130,7 +131,7 @@ const ProductDetails = () => {
                                             <span > <FaShareSquare className='text-secondary'></FaShareSquare> Share</span>
                                             {
                                                 !isAdmin && !isSeller && user &&
-                                                <span role="button" className={wishlist?.wishlist === true ? 'text-primary' : 'text-secondary'} onClick={() => handleAddToWishList(product._id, wishlist?.wishlist === true ? 'Product remove to the wishlist!' : 'Product added to the wishlist!')}>
+                                                <span role="button" className={wishlist?.wishlist === addWish ? 'text-primary' : 'text-secondary'} onClick={() => handleAddToWishList(product._id, wishlist?.wishlist === true ? 'Product remove to the wishlist!' : 'Product added to the wishlist!')}>
                                                     <FaHeart className='me-1' />
                                                     Wishlist
                                                 </span>
