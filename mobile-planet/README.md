@@ -5,7 +5,7 @@ A resell phone marketplace.Here you can buy and sell your old and new phone easi
 
 ## Demo Link
 
-https://photography-world-28b81.web.app/
+https://mobile-planet-e8ad8.web.app/
 
 ## Demo Admin Credentials
 
@@ -42,5 +42,6 @@ pass: 123456
 - stripe
 ## API Reference
 ```
-  https://b6a11-service-review-server-side-prantoc.vercel.app/
+ https://b612-used-products-resale-server-side-prantoc.vercel.app/
+
 ```

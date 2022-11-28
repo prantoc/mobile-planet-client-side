@@ -5,7 +5,7 @@ export const useSeller = email => {
     const [isSellerLoading, setIsSellerLoading] = useState(true)
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/users/seller/${email}`, {
+            fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/users/seller/${email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('mobile-planet')}`
                 }

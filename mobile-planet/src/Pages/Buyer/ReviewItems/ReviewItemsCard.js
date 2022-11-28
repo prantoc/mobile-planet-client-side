@@ -7,7 +7,7 @@ const ReviewItemsCard = ({ bkp, setBookedProduct, handleShow }) => {
 
     const { data: paidProduct = {}, isLoading } = useQuery({
         queryKey: ['paymentProduct', bkp?.productId],
-        queryFn: () => fetch(`http://localhost:5000/paymentProduct?id=${bkp?.productId}`, {
+        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/paymentProduct?id=${bkp?.productId}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
@@ -28,12 +28,9 @@ const ReviewItemsCard = ({ bkp, setBookedProduct, handleShow }) => {
                                 <p className="text-muted mb-0"> Place On <span className="fw-bold text-body">{moment(bkp.createdAt,).format('D,MMMM YYYY')}</span> </p>
                             </div>
                             <div>
-                                {bkp.paid === true && bkp.buyerEmail === paidProduct.buyerEmail ?
+                                {bkp.paid === true ?
                                     <span className='text-success fw-bold fs-5'>PAID</span> :
-                                    bkp.paid === true && bkp.buyerEmail !== paidProduct.buyerEmail ?
-                                        <span className='text-primary fw-bold fs-5'>SOLD</span>
-                                        :
-                                        <Button className='btn-sm' onClick={() => { setBookedProduct(bkp); handleShow() }}>Pay</Button>
+                                    <Button className='btn-sm' onClick={() => { setBookedProduct(bkp); handleShow() }}>Pay</Button>
                                 }
                             </div>
                         </div>
@@ -55,7 +52,7 @@ const ReviewItemsCard = ({ bkp, setBookedProduct, handleShow }) => {
 
 
 
-                            {bkp.paid === true && bkp.buyerEmail === paidProduct.buyerEmail ?
+                            {bkp.paid === true ?
                                 <>
                                     <li className="step0 active" id="step1"><span
                                         style={{ marginLeft: '22px', marginTop: '12px' }}>Placed</span></li>
@@ -64,22 +61,13 @@ const ReviewItemsCard = ({ bkp, setBookedProduct, handleShow }) => {
                                         style={{ marginRight: '22px' }}>Deliverd</span></li>
                                 </>
                                 :
-                                bkp.paid === true && bkp.buyerEmail === paidProduct.buyerEmail ?
-                                    <>
-                                        <li className="step0 active" id="step1"><span
-                                            style={{ marginLeft: '22px', marginTop: '12px' }}>Placed</span></li>
-                                        <li className="step0 active text-center" id="step2"><span>Payment</span></li>
-                                        <li className="step0 active text-end" id="step3"><span
-                                            style={{ marginRight: '22px' }}>Sold</span></li>
-                                    </>
-                                    :
-                                    <>
-                                        <li className="step0 active" id="step1"><span
-                                            style={{ marginLeft: '22px', marginTop: '12px' }}>Placed</span></li>
-                                        <li className="step0  text-center" id="step2"><span>Payment</span></li>
-                                        <li className="step0 text-muted text-end" id="step3"><span
-                                            style={{ marginRight: '22px' }}>Deliverd</span></li>
-                                    </>
+                                <>
+                                    <li className="step0 active" id="step1"><span
+                                        style={{ marginLeft: '22px', marginTop: '12px' }}>Placed</span></li>
+                                    <li className="step0  text-center" id="step2"><span>Payment</span></li>
+                                    <li className="step0 text-muted text-end" id="step3"><span
+                                        style={{ marginRight: '22px' }}>Deliverd</span></li>
+                                </>
                             }
 
 
