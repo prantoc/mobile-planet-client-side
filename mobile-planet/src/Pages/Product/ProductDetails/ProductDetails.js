@@ -11,7 +11,6 @@ import BookOrderModal from '../BookOrderModal/BookOrderModal';
 import { useAdmin } from '../../../hooks/useAdmin';
 import { useSeller } from '../../../hooks/useSeller';
 import { useQuery } from '@tanstack/react-query';
-import { successToast } from '../../../toast/Toaster';
 import axios from 'axios';
 import useTitle from '../../../hooks/useTitle';
 const ProductDetails = () => {
@@ -50,7 +49,7 @@ const ProductDetails = () => {
     }, [product?._id, addWish])
 
 
-    const handleAddToWishList = (id, mgs) => {
+    const handleAddToWishList = (id) => {
         setAddWish(!addWish)
         fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/addToWishlistProduct?id=${id}&name=${product.productName}&img=${product.productImage}&price=${product.resellPrice}`, {
             method: 'put',
@@ -61,7 +60,6 @@ const ProductDetails = () => {
             .then(res => res.json())
             .then(res => {
                 if (res.acknowledged) {
-                    successToast(mgs)
                     refetch()
                 }
             })
@@ -131,7 +129,7 @@ const ProductDetails = () => {
                                             <span > <FaShareSquare className='text-secondary'></FaShareSquare> Share</span>
                                             {
                                                 !isAdmin && !isSeller && user &&
-                                                <span role="button" className={wishlist?.wishlist === addWish ? 'text-primary' : 'text-secondary'} onClick={() => handleAddToWishList(product._id, wishlist?.wishlist === true ? 'Product remove to the wishlist!' : 'Product added to the wishlist!')}>
+                                                <span role="button" className={wishlist?.wishlist === addWish ? 'text-primary' : 'text-secondary'} onClick={() => handleAddToWishList(product._id)}>
                                                     <FaHeart className='me-1' />
                                                     Wishlist
                                                 </span>
