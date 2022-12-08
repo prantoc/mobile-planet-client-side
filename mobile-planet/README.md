@@ -52,4 +52,4 @@ pass: 123456
 - To build powerfull search and filter options
 - More payment gateway like sslcommerce for bangladesh and other which have a trial option
 - live chat option with socket io
--  
+- Product tracking options  
