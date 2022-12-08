@@ -53,3 +53,4 @@ pass: 123456
 - More payment gateway like sslcommerce for bangladesh and other which have a trial option
 - live chat option with socket io
 - Product tracking options  
+- State managemnet proper way
