@@ -55,3 +55,4 @@ pass: 123456
 - Product tracking options  
 - State managemnet proper way
 - net and clean design add more sections 
+- fixes bugs
