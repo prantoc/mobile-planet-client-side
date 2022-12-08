@@ -56,3 +56,4 @@ pass: 123456
 - State managemnet proper way
 - net and clean design add more sections 
 - fixes bugs
+- Added more function into admin panel 
