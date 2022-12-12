@@ -45,11 +45,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/booked-items",
-                element: <ReviewItems></ReviewItems>
+                element: <PrivateRoute><ReviewItems></ReviewItems></PrivateRoute>
             },
             {
                 path: "/wishlist-items",
-                element: <WishlistItems></WishlistItems>
+                element: <PrivateRoute><WishlistItems></WishlistItems></PrivateRoute>
             },
             {
                 path: "/login",
