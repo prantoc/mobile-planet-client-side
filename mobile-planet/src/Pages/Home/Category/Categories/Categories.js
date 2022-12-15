@@ -6,7 +6,7 @@ import Loading from '../../../Shared/Loading/Loading';
 import CategoryCard from '../CategoryCard/CategoryCard';
 const Categories = () => {
     const { data: categories, isLoading } = useQuery({
-        queryKey: ['category'],
+        queryKey: ['cats'],
         queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/category`).then(res => res.json())
 
     })
