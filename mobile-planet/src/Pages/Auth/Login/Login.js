@@ -63,7 +63,7 @@ const Login = () => {
 
     //? Save user some details into mongodb
     const saveUser = (user) => {
-        fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/users`, {
+        fetch(`http://localhost:5000/users`, {
             method: 'POST',
             headers: {
                 "content-type": "application/json"
@@ -72,8 +72,9 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 if (data.acknowledged) {
-                    successToast('successfully created an account')
+                    // successToast('successfully created an account')
                     setLoading(false)
                     setLoggedInUserEmail(user.email)
                 }
