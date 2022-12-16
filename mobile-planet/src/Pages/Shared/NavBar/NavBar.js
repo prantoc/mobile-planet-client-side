@@ -48,9 +48,11 @@ const NavBar = () => {
                             <LinkContainer to="blog">
                                 <Nav.Link>Blog</Nav.Link>
                             </LinkContainer>
-                            {!isSeller && !isAdmin && user && <LinkContainer to="/wishlist-items">
-                                <Nav.Link >Wish List</Nav.Link>
-                            </LinkContainer>}
+                            {!isSeller && !isAdmin && user &&
+                                <LinkContainer to="/wishlist-items">
+                                    <Nav.Link >Wish List</Nav.Link>
+                                </LinkContainer>
+                            }
                             {
                                 user
                                 &&
