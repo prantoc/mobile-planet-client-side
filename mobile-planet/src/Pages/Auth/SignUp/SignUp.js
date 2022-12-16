@@ -58,9 +58,8 @@ const SignUp = () => {
                 }
                 saveUser(user)
                 successToast(`Hi,${userData.displayName}  You Logged in successfully`);
-            }).catch((e) => {
-                errorToast(e);
-            });
+            })
+            .catch(err => console.error(err))
     }
 
     //? Save user some details into mongodb
@@ -83,6 +82,7 @@ const SignUp = () => {
                     errorToast('Something went wrong')
                 }
             })
+            .catch(err => console.error(err))
     }
 
     return (

@@ -57,9 +57,8 @@ const Login = () => {
                 }
                 saveUser(user)
                 successToast(`Hi,${user.displayName}  You Logged in successfully`);
-            }).catch((e) => {
-                errorToast(e);
-            });
+            })
+            .catch(err => console.error(err))
     }
 
     //? Save user some details into mongodb
@@ -82,6 +81,7 @@ const Login = () => {
                     errorToast('Something went wrong')
                 }
             })
+            .catch(err => console.log(err))
     }
 
     return (
