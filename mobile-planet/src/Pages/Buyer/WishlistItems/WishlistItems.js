@@ -11,7 +11,7 @@ const WishlistItems = () => {
     useTitle('Wishlist')
     const { data: wishlists = [], isLoading, refetch } = useQuery({
         queryKey: ['wishlistedProducts'],
-        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/wishlistedProducts`, {
+        queryFn: () => fetch(`http://localhost:5000/wishlistedProducts`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
@@ -21,7 +21,7 @@ const WishlistItems = () => {
 
 
     const handleRemoveToWishList = (id) => {
-        fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/removeWishlistProduct/${id}`, {
+        fetch(`http://localhost:5000/removeWishlistProduct/${id}`, {
             method: 'get',
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`

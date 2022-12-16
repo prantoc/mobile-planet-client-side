@@ -7,7 +7,7 @@ import Loading from '../../../Shared/Loading/Loading';
 const Advertise = () => {
     const { data: products, isLoading } = useQuery({
         queryKey: ['product'],
-        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/advertiseProducts`).then(res => res.json())
+        queryFn: () => fetch(`http://localhost:5000/advertiseProducts`).then(res => res.json())
 
     })
     if (isLoading) {

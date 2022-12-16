@@ -13,7 +13,7 @@ const PaymentModal = ({ show, handleClose, bookedProduct, setShow, refetch }) =>
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("https://b612-used-products-resale-server-side-prantoc.vercel.app/create-payment-intent", {
+        fetch("http://localhost:5000/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const PaymentModal = ({ show, handleClose, bookedProduct, setShow, refetch }) =>
                 productId
             }
 
-            fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/payments`, {
+            fetch(`http://localhost:5000/payments`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

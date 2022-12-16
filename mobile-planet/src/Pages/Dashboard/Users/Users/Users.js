@@ -11,7 +11,7 @@ import Loading from '../../../Shared/Loading/Loading';
 const Users = () => {
     useTitle('Dashboard-Users')
     const { user } = useContext(AuthContext);
-    const url = `https://b612-used-products-resale-server-side-prantoc.vercel.app/users?email=${user.email}`
+    const url = `http://localhost:5000/users?email=${user.email}`
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: () => fetch(url, {
@@ -33,7 +33,7 @@ const Users = () => {
                         }
                     }
 
-                    axios.delete(`https://b612-used-products-resale-server-side-prantoc.vercel.app/users/${id}`, config)
+                    axios.delete(`http://localhost:5000/users/${id}`, config)
                         .then(res => {
                             if (res.data.acknowledged) {
                                 swlFire('User has been deleted successfully!')
@@ -51,7 +51,7 @@ const Users = () => {
         approveItemAlret()
             .then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/users/${id}`, {
+                    fetch(`http://localhost:5000/users/${id}`, {
                         method: 'PUT',
                         headers: {
                             authorization: `bearer ${localStorage.getItem('mobile-planet')}`

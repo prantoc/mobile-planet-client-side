@@ -18,7 +18,7 @@ const Product = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const url = `https://b612-used-products-resale-server-side-prantoc.vercel.app/product/${user.email}`
+    const url = `http://localhost:5000/product/${user.email}`
     const { data: products, isLoading, refetch } = useQuery({
         queryKey: ['product'],
         queryFn: () => fetch(url, {
@@ -40,7 +40,7 @@ const Product = () => {
                         }
                     }
 
-                    axios.delete(`https://b612-used-products-resale-server-side-prantoc.vercel.app/product/${id}`, config)
+                    axios.delete(`http://localhost:5000/product/${id}`, config)
                         .then(res => {
                             if (res.data.acknowledged) {
                                 swlFire('Product has been deleted successfully!')
@@ -58,7 +58,7 @@ const Product = () => {
         approveItemAlret()
             .then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/product/${id}`, {
+                    fetch(`http://localhost:5000/product/${id}`, {
                         method: 'PUT',
                         headers: {
                             authorization: `bearer ${localStorage.getItem('mobile-planet')}`
@@ -81,7 +81,7 @@ const Product = () => {
         approveItemAlret()
             .then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/productAdvertise/${id}`, {
+                    fetch(`http://localhost:5000/productAdvertise/${id}`, {
                         method: 'get',
                         headers: {
                             authorization: `bearer ${localStorage.getItem('mobile-planet')}`

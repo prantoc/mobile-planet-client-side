@@ -24,7 +24,7 @@ const BookOrderModal = ({ user, handleClose, setShow, show, product, refetch }) 
             }
         }
 
-        axios.post('https://b612-used-products-resale-server-side-prantoc.vercel.app/book-product', bookOrder, config)
+        axios.post('http://localhost:5000/book-product', bookOrder, config)
             .then(res => {
                 if (res.data.acknowledged) {
                     setShow(false)

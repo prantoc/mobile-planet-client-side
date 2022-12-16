@@ -18,7 +18,7 @@ const Category = () => {
     const imgHostKey = process.env.REACT_APP_IMGBB_KEY;
     const { data: categories, isLoading, refetch } = useQuery({
         queryKey: ['category'],
-        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/category`, {
+        queryFn: () => fetch(`http://localhost:5000/category`, {
             headers: {
                 authoraization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
@@ -53,7 +53,7 @@ const Category = () => {
                         }
                     }
 
-                    axios.post('https://b612-used-products-resale-server-side-prantoc.vercel.app/add-category', category, config)
+                    axios.post('http://localhost:5000/add-category', category, config)
                         .then(res => {
                             if (res.data.acknowledged) {
                                 setShow(false)
@@ -77,7 +77,7 @@ const Category = () => {
                         }
                     }
 
-                    axios.delete(`https://b612-used-products-resale-server-side-prantoc.vercel.app/category/${id}`, config)
+                    axios.delete(`http://localhost:5000/category/${id}`, config)
                         .then(res => {
                             if (res.data.acknowledged) {
                                 swlFire('Category has been deleted successfully!')

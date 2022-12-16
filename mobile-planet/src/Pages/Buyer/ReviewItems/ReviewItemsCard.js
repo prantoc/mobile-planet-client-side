@@ -5,9 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Shared/Loading/Loading';
 const ReviewItemsCard = ({ bkp, setBookedProduct, handleShow }) => {
 
-    const { data: paidProduct = {}, isLoading } = useQuery({
+    const { isLoading } = useQuery({
         queryKey: ['paymentProduct', bkp?.productId],
-        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/paymentProduct?id=${bkp?.productId}`, {
+        queryFn: () => fetch(`http://localhost:5000/paymentProduct?id=${bkp?.productId}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }

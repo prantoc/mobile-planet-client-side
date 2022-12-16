@@ -5,7 +5,7 @@ export const useAdmin = email => {
     const [isAdminLoading, setIsAdminLoading] = useState(true)
     useEffect(() => {
         if (email) {
-            fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/users/admin/${email}`, {
+            fetch(`http://localhost:5000/users/admin/${email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('mobile-planet')}`
                 }

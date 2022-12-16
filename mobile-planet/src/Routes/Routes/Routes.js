@@ -32,12 +32,12 @@ export const router = createBrowserRouter([
             {
                 path: "/category/:name",
                 element: <Products></Products>,
-                loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/category/${params.name}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.name}`)
             },
             {
                 path: "/product-details/:id",
                 element: <ProductDetails></ProductDetails>,
-                loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/product-details/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/product-details/${params.id}`)
             },
             {
                 path: "/blog",

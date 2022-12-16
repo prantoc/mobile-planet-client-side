@@ -10,7 +10,7 @@ const Buyers = () => {
     const { user } = useContext(AuthContext);
     const { data: buyers, isLoading } = useQuery({
         queryKey: ['buyers', user?.email],
-        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/buyersList?email=${user?.email}`, {
+        queryFn: () => fetch(`http://localhost:5000/buyersList?email=${user?.email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }

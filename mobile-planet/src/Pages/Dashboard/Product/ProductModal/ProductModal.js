@@ -12,7 +12,7 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
     const imgHostKey = process.env.REACT_APP_IMGBB_KEY;
     const { data: cateNames } = useQuery({
         queryKey: ['category'],
-        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/category-name`, {
+        queryFn: () => fetch(`http://localhost:5000/category-name`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
@@ -26,7 +26,7 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
         }
-        axios.get(`https://b612-used-products-resale-server-side-prantoc.vercel.app/user/${user?.email}`, config)
+        axios.get(`http://localhost:5000/user/${user?.email}`, config)
             .then(res => {
                 setSellerData(res.data)
             })
@@ -62,7 +62,7 @@ const ProductModal = ({ user, handleClose, setShow, show, refetch }) => {
                         }
                     }
 
-                    axios.post('https://b612-used-products-resale-server-side-prantoc.vercel.app/add-product', product, config)
+                    axios.post('http://localhost:5000/add-product', product, config)
                         .then(res => {
                             if (res.data.acknowledged) {
                                 setShow(false)
