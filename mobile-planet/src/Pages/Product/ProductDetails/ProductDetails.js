@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
