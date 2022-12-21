@@ -64,7 +64,7 @@ const SignUp = () => {
 
     //? Save user some details into mongodb
     const saveUser = (user) => {
-        fetch(`http://localhost:5000/users`, {
+        fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/users`, {
             method: 'POST',
             headers: {
                 "content-type": "application/json"

@@ -10,7 +10,7 @@ const AllProducts = () => {
     useTitle('All Products')
     const { data: products, isLoading } = useQuery({
         queryKey: ['category'],
-        queryFn: () => fetch(`http://localhost:5000/allproducts`, {
+        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/allproducts`, {
             headers: {
                 authoraization: `bearer ${localStorage.getItem('mobile-planet')}`
             }

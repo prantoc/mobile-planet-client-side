@@ -25,7 +25,7 @@ const ProductDetails = () => {
 
     const { data: bookedProduct, isLoading, refetch } = useQuery({
         queryKey: ['booked-product', user?.email, product?._id],
-        queryFn: () => fetch(`http://localhost:5000/bookedProduct?email=${user?.email}&id=${product?._id}`, {
+        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/bookedProduct?email=${user?.email}&id=${product?._id}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
@@ -34,7 +34,7 @@ const ProductDetails = () => {
 
     const { data: wishlist, isLoading: wishLoading, refetch: wishRefatch } = useQuery({
         queryKey: ['wishlist', product?._id],
-        queryFn: () => fetch(`http://localhost:5000/wishlistProduct?id=${product?._id}`, {
+        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/wishlistProduct?id=${product?._id}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
@@ -42,7 +42,7 @@ const ProductDetails = () => {
     })
 
     const handleAddToWishList = (id) => {
-        fetch(`http://localhost:5000/addToWishlistProduct?id=${id}&name=${product.productName}&img=${product.productImage}&price=${product.resellPrice}`, {
+        fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/addToWishlistProduct?id=${id}&name=${product.productName}&img=${product.productImage}&price=${product.resellPrice}`, {
             method: 'put',
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`

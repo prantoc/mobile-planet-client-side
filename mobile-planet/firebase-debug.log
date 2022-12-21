@@ -1,0 +1,87 @@
+[debug] [2022-12-21T16:36:23.352Z] ----------------------------------------------------------------------
+[debug] [2022-12-21T16:36:23.354Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Pranto\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-12-21T16:36:23.354Z] CLI Version:   11.18.0
+[debug] [2022-12-21T16:36:23.355Z] Platform:      win32
+[debug] [2022-12-21T16:36:23.355Z] Node Version:  v18.12.1
+[debug] [2022-12-21T16:36:23.355Z] Time:          Wed Dec 21 2022 22:36:23 GMT+0600 (Bangladesh Standard Time)
+[debug] [2022-12-21T16:36:23.356Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-21T16:36:23.417Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-21T16:36:23.417Z] > authorizing via signed-in user (prantoc71@gmail.com)
+[debug] [2022-12-21T16:36:23.417Z] [iam] checking project mobile-planet-e8ad8 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-12-21T16:36:23.419Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobile-planet-e8ad8:testIamPermissions [none]
+[debug] [2022-12-21T16:36:23.419Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobile-planet-e8ad8:testIamPermissions x-goog-quota-user=projects/mobile-planet-e8ad8
+[debug] [2022-12-21T16:36:23.420Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobile-planet-e8ad8:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-21T16:36:23.923Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobile-planet-e8ad8:testIamPermissions 200
+[debug] [2022-12-21T16:36:23.924Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobile-planet-e8ad8:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-21T16:36:23.925Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mobile-planet-e8ad8 [none]
+[debug] [2022-12-21T16:36:24.482Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mobile-planet-e8ad8 200
+[debug] [2022-12-21T16:36:24.482Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mobile-planet-e8ad8 {"projectId":"mobile-planet-e8ad8","projectNumber":"336784009554","displayName":"mobile-planet","name":"projects/mobile-planet-e8ad8","resources":{"hostingSite":"mobile-planet-e8ad8"},"state":"ACTIVE","etag":"1_7b56c362-211e-4c48-87e4-eb47f4e9e029"}
+[info] 
+[info] === Deploying to 'mobile-planet-e8ad8'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-12-21T16:36:24.489Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/versions [none]
+[debug] [2022-12-21T16:36:24.490Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-12-21T16:36:26.022Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/versions 200
+[debug] [2022-12-21T16:36:26.022Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/versions {"name":"projects/336784009554/sites/mobile-planet-e8ad8/versions/b765151aff99095e","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[mobile-planet-e8ad8]: beginning deploy... 
+[info] i  hosting[mobile-planet-e8ad8]: found 20 files in build 
+[debug] [2022-12-21T16:36:26.036Z] [hosting] uploading with 200 concurrency
+[debug] [2022-12-21T16:36:26.463Z] [hosting] hash cache [YnVpbGQ] stored for 20 files
+[debug] [2022-12-21T16:36:26.463Z] [hosting][hash queue][FINAL] {"max":420,"min":3,"avg":40.25,"active":0,"complete":20,"success":20,"errored":0,"retried":0,"total":20,"elapsed":425}
+[debug] [2022-12-21T16:36:26.464Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/336784009554/sites/mobile-planet-e8ad8/versions/b765151aff99095e:populateFiles [none]
+[debug] [2022-12-21T16:36:26.464Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/336784009554/sites/mobile-planet-e8ad8/versions/b765151aff99095e:populateFiles {"files":{"/favicon.ico":"0747edb75afdef13918363daa139d0738b7158ec35f9228eb71749332211be66","/logo192.png":"3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b","/logo512.png":"ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331","/manifest.json":"aff3449bdc238776f5d6d967f19ec491b36aed5fb7f23ccff6500736fd58494a","/robots.txt":"bfe106a3fb878dc83461c86818bf74fc1bdc7f28538ba613cd3e775516ce8b49","/asset-manifest.json":"7e590dffac2748639b1556f318309ae2da91cc6051d9ddb89c30294a59fa177e","/index.html":"11621a8bfbf3497b27b694e0ee08a4d77498981c7b052a8f5a69422b591b5b17","/static/js/787.03a65109.chunk.js":"985beafcc27f042784135ff906cca2ec8773aed32795737bbb92a03c202c2050","/static/js/787.03a65109.chunk.js.map":"9a0936c569672ffc461662e7ba0b9ed809a6041dc39baa8f17c77533aa2a322e","/static/js/main.a3a877e5.js.LICENSE.txt":"1c2da7853f875928555542883e8cad5db2e01225a965c03ebb0b41a3186b2f32","/static/media/secure-payment.a0b3e151b9e4b627760e.png":"8eb9d90058e1f27598830474143f1dd4196502b3a6c133fcca62e09a294091a9","/static/media/courier.ae789c85de7f13afbb88.png":"66043b1260df3d9abb7eafaf94dc74384cb784cd934a1328155bc4d8f95b7bef","/static/media/verification.c22d558463936601b89a.png":"759b8eb04f915dff7bc3269fe53d900fe83d28463ac1382cb4c5d5bca8cb75e6","/static/media/man.ab45eb1d42b1faaf3d12.png":"42ebfdebd6ea6f14fef2308136cbad40b3b12ee73cca7381f2a08a7e3afbf618","/static/css/main.ca2fc113.css":"d06cdc1eb07980d0286c2eed60340ed6c69ee19909772ca4295fc33a8bf62a59","/static/css/main.ca2fc113.css.map":"ce407d9641a5c813ee2a681b051c2f69850210c111f2d76597f501d0e26483b1","/static/js/main.a3a877e5.js":"76e02111de5c8af1d9913dc7aecfe8cc85611dc30fb7eb1869a1114adf2ce9ab","/static/media/banner4.c2b699a2495c0f6b42d7.jpg":"f86835cf8464acb6d1bbb0535422462c74c71cdfa95260da4b935e1fc8807c80","/static/media/error-404.cb6e394e70b04b984f36.gif":"d1f7b123fd66952d3fa59e351e9fcd80be08481695461bbd2903d3b6fce4597e","/static/js/main.a3a877e5.js.map":"d975b04ec236a651bd32c26af4b3e8b9d0ecd922e957e7318fc8f8a2372435fb"}}
+[debug] [2022-12-21T16:36:28.088Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/336784009554/sites/mobile-planet-e8ad8/versions/b765151aff99095e:populateFiles 200
+[debug] [2022-12-21T16:36:28.088Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/336784009554/sites/mobile-planet-e8ad8/versions/b765151aff99095e:populateFiles {"uploadRequiredHashes":["11621a8bfbf3497b27b694e0ee08a4d77498981c7b052a8f5a69422b591b5b17","76e02111de5c8af1d9913dc7aecfe8cc85611dc30fb7eb1869a1114adf2ce9ab","d975b04ec236a651bd32c26af4b3e8b9d0ecd922e957e7318fc8f8a2372435fb","7e590dffac2748639b1556f318309ae2da91cc6051d9ddb89c30294a59fa177e"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files"}
+[debug] [2022-12-21T16:36:28.090Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/11621a8bfbf3497b27b694e0ee08a4d77498981c7b052a8f5a69422b591b5b17 [none]
+[debug] [2022-12-21T16:36:28.090Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/11621a8bfbf3497b27b694e0ee08a4d77498981c7b052a8f5a69422b591b5b17 [stream]
+[debug] [2022-12-21T16:36:28.092Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/76e02111de5c8af1d9913dc7aecfe8cc85611dc30fb7eb1869a1114adf2ce9ab [none]
+[debug] [2022-12-21T16:36:28.092Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/76e02111de5c8af1d9913dc7aecfe8cc85611dc30fb7eb1869a1114adf2ce9ab [stream]
+[debug] [2022-12-21T16:36:28.093Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/d975b04ec236a651bd32c26af4b3e8b9d0ecd922e957e7318fc8f8a2372435fb [none]
+[debug] [2022-12-21T16:36:28.093Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/d975b04ec236a651bd32c26af4b3e8b9d0ecd922e957e7318fc8f8a2372435fb [stream]
+[debug] [2022-12-21T16:36:28.094Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/7e590dffac2748639b1556f318309ae2da91cc6051d9ddb89c30294a59fa177e [none]
+[debug] [2022-12-21T16:36:28.094Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/7e590dffac2748639b1556f318309ae2da91cc6051d9ddb89c30294a59fa177e [stream]
+[debug] [2022-12-21T16:36:28.095Z] [hosting][populate queue][FINAL] {"max":1628,"min":1628,"avg":1628,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1633}
+[debug] [2022-12-21T16:36:28.096Z] [hosting] uploads queued: 4
+[debug] [2022-12-21T16:36:29.993Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/76e02111de5c8af1d9913dc7aecfe8cc85611dc30fb7eb1869a1114adf2ce9ab 200
+[debug] [2022-12-21T16:36:29.993Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/76e02111de5c8af1d9913dc7aecfe8cc85611dc30fb7eb1869a1114adf2ce9ab [stream]
+[debug] [2022-12-21T16:36:29.998Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/11621a8bfbf3497b27b694e0ee08a4d77498981c7b052a8f5a69422b591b5b17 200
+[debug] [2022-12-21T16:36:29.998Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/11621a8bfbf3497b27b694e0ee08a4d77498981c7b052a8f5a69422b591b5b17 [stream]
+[debug] [2022-12-21T16:36:30.877Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/d975b04ec236a651bd32c26af4b3e8b9d0ecd922e957e7318fc8f8a2372435fb 200
+[debug] [2022-12-21T16:36:30.877Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/d975b04ec236a651bd32c26af4b3e8b9d0ecd922e957e7318fc8f8a2372435fb [stream]
+[debug] [2022-12-21T16:36:35.841Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/7e590dffac2748639b1556f318309ae2da91cc6051d9ddb89c30294a59fa177e 200
+[debug] [2022-12-21T16:36:35.842Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/mobile-planet-e8ad8/versions/b765151aff99095e/files/7e590dffac2748639b1556f318309ae2da91cc6051d9ddb89c30294a59fa177e [stream]
+[debug] [2022-12-21T16:36:35.842Z] [hosting][upload queue][FINAL] {"max":7752,"min":1904,"avg":3588.25,"active":0,"complete":4,"success":4,"errored":0,"retried":0,"total":4,"elapsed":7753}
+[info] +  hosting[mobile-planet-e8ad8]: file upload complete 
+[debug] [2022-12-21T16:36:35.844Z] [hosting] deploy completed after 9820ms
+[debug] [2022-12-21T16:36:35.847Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "mobile-planet-e8ad8"
+    },
+    "version": "projects/336784009554/sites/mobile-planet-e8ad8/versions/b765151aff99095e"
+  }
+]
+[info] i  hosting[mobile-planet-e8ad8]: finalizing version... 
+[debug] [2022-12-21T16:36:35.849Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/versions/b765151aff99095e updateMask=status%2Cconfig
+[debug] [2022-12-21T16:36:35.850Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/versions/b765151aff99095e {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2022-12-21T16:36:37.224Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/versions/b765151aff99095e 200
+[debug] [2022-12-21T16:36:37.224Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/versions/b765151aff99095e {"name":"projects/336784009554/sites/mobile-planet-e8ad8/versions/b765151aff99095e","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2022-12-21T16:36:26.115820Z","createUser":{"email":"prantoc71@gmail.com"},"finalizeTime":"2022-12-21T16:36:37.812748Z","finalizeUser":{"email":"prantoc71@gmail.com"}}
+[debug] [2022-12-21T16:36:37.224Z] [hosting] finalized version for mobile-planet-e8ad8:[object Object]
+[info] +  hosting[mobile-planet-e8ad8]: version finalized 
+[info] i  hosting[mobile-planet-e8ad8]: releasing new version... 
+[debug] [2022-12-21T16:36:37.227Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/channels/live/releases versionName=projects%2F336784009554%2Fsites%2Fmobile-planet-e8ad8%2Fversions%2Fb765151aff99095e
+[debug] [2022-12-21T16:36:37.227Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/mobile-planet-e8ad8/channels/live/releases {}

@@ -32,7 +32,7 @@ const ReviewItems = () => {
     //             authorization: `bearer ${localStorage.getItem('mobile-planet')}`
     //         }
     //     }
-    //     axios.get(`http://localhost:5000/bookedProducts?email=${user?.email}`, config)
+    //     axios.get(`https://b612-used-products-resale-server-side-prantoc.vercel.app/bookedProducts?email=${user?.email}`, config)
     //         .then(res => {
     //             setBookedProducts(res.data)
     //             setIsLoading(false)
@@ -42,7 +42,7 @@ const ReviewItems = () => {
 
     const { data: bookedProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['wishlistedProducts', user?.email],
-        queryFn: () => fetch(`http://localhost:5000/bookedProducts?email=${user?.email}`, {
+        queryFn: () => fetch(`https://b612-used-products-resale-server-side-prantoc.vercel.app/bookedProducts?email=${user?.email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
