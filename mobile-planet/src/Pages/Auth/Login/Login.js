@@ -23,7 +23,6 @@ const Login = () => {
     if (token) {
         navigate('/')
     }
-
     if (token) {
         navigate(from, { replace: true });
     }
@@ -56,7 +55,8 @@ const Login = () => {
                     verified: false
                 }
                 saveUser(user)
-                successToast(`Hi,${user.displayName}  You Logged in successfully`);
+                setLoggedInUserEmail(userData?.email)
+                successToast(`You Logged in successfully`);
             })
             .catch(err => console.error(err))
     }
@@ -76,7 +76,7 @@ const Login = () => {
                 if (data.acknowledged) {
                     // successToast('successfully created an account')
                     setLoading(false)
-                    setLoggedInUserEmail(user.email)
+                    setLoggedInUserEmail(user?.email)
                 }
                 else {
                     errorToast('Something went wrong')
