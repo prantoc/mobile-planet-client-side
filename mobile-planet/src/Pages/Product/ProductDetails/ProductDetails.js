@@ -11,7 +11,6 @@ import BookOrderModal from '../BookOrderModal/BookOrderModal';
 import { useAdmin } from '../../../hooks/useAdmin';
 import { useSeller } from '../../../hooks/useSeller';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import useTitle from '../../../hooks/useTitle';
 const ProductDetails = () => {
     const { user } = useContext(AuthContext);
@@ -32,25 +31,17 @@ const ProductDetails = () => {
             }
         }).then(res => res.json())
     })
-    const [wishlist, setWishlist] = useState('');
-    const [addWish, setAddWish] = useState(true);
 
-    useEffect(() => {
-        const config = {
+    const { data: wishlist, isLoading: wishLoading, refetch: wishRefatch } = useQuery({
+        queryKey: ['wishlist', product?._id],
+        queryFn: () => fetch(`http://localhost:5000/wishlistProduct?id=${product?._id}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('mobile-planet')}`
             }
-        }
-        axios.get(`http://localhost:5000/wishlistProduct?id=${product?._id}`, config)
-            .then(res => {
-                setWishlist(res.data)
-            })
-
-    }, [product?._id, addWish])
-
+        }).then(res => res.json())
+    })
 
     const handleAddToWishList = (id) => {
-        setAddWish(!addWish)
         fetch(`http://localhost:5000/addToWishlistProduct?id=${id}&name=${product.productName}&img=${product.productImage}&price=${product.resellPrice}`, {
             method: 'put',
             headers: {
@@ -61,12 +52,13 @@ const ProductDetails = () => {
             .then(res => {
                 if (res.acknowledged) {
                     refetch()
+                    wishRefatch()
                 }
             })
     }
 
 
-    if (navigation.state === "loading" || isLoading) {
+    if (navigation.state === "loading" || isLoading || wishLoading) {
         return <Loading></Loading>
     }
     return (
@@ -129,7 +121,7 @@ const ProductDetails = () => {
                                             <span > <FaShareSquare className='text-secondary'></FaShareSquare> Share</span>
                                             {
                                                 !isAdmin && !isSeller && user &&
-                                                <span role="button" className={wishlist?.wishlist === addWish ? 'text-primary' : 'text-secondary'} onClick={() => handleAddToWishList(product._id)}>
+                                                <span role="button" className={wishlist?.wishlist === true ? 'text-primary' : 'secondary'} onClick={() => handleAddToWishList(product._id)}>
                                                     <FaHeart className='me-1' />
                                                     Wishlist
                                                 </span>
