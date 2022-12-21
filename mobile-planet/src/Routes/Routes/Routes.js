@@ -12,6 +12,7 @@ import Product from "../../Pages/Dashboard/Product/Product/Product";
 import Buyers from "../../Pages/Dashboard/Users/Buyers/Buyers";
 import Users from "../../Pages/Dashboard/Users/Users/Users";
 import Home from "../../Pages/Home/Home/Home";
+import AllProducts from "../../Pages/Product/AllProducts/AllProducts";
 import ProductDetails from "../../Pages/Product/ProductDetails/ProductDetails";
 import Products from "../../Pages/Product/Products/Products";
 import Error from "../../Pages/Shared/Error/Error";
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>
+            },
+            {
+                path: "/all-products",
+                element: <AllProducts></AllProducts>
             },
             {
                 path: "/category/:name",
